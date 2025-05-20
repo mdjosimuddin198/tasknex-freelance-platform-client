@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
@@ -6,6 +6,7 @@ import "swiper/css/pagination";
 import Slider from "./Slider";
 import { useLoaderData } from "react-router";
 import TaskCard from "./TaskCard";
+import { AuthContext } from "../context/AuthProvider";
 
 const titles = [
   { id: 1, image: "https://i.ibb.co/pjYZhspH/image.png" },
@@ -15,8 +16,10 @@ const titles = [
 ];
 
 const Hero = () => {
-  const data = useLoaderData();
-  console.log(data);
+  const { logedInuser } = useContext(AuthContext);
+  const allTasks = useLoaderData();
+  const tasks = allTasks.filter((task) => task.email !== logedInuser?.email);
+  console.log(allTasks);
   return (
     <>
       <Swiper
@@ -34,7 +37,7 @@ const Hero = () => {
         ))}
       </Swiper>
       <div className="grid grid-cols-1 my-6 md:grid-cols-2 lg:grid-cols-3 gap-3">
-        {data.map((job) => (
+        {tasks.map((job) => (
           <TaskCard key={job._id} job={job}></TaskCard>
         ))}
       </div>

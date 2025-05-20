@@ -74,27 +74,41 @@ const NavBar = () => {
           <ul className="menu menu-horizontal px-1 ">{links}</ul>
         </div>
         <div className="navbar-end gap-4">
-          <div
-            className="tooltip"
-            // data-tip={logedInuser && logedInuser.displayName}
-          >
-            <img
-              className="w-12 rounded-full"
-              src={logedInuser ? logedInuser.photoURL : userIcon}
-            />
+          <div className="navbar-end gap-4">
+            {logedInuser ? (
+              <div className="relative w-10 h-10">
+                <div className="group relative">
+                  <img
+                    src={logedInuser.photoURL}
+                    alt="User"
+                    className="w-10 h-10 rounded-full border cursor-pointer z-10"
+                  />
+
+                  {/* Display Name Tooltip */}
+                  <div
+                    className="absolute right-0 top-12 bg-black text-white text-xs px-3 py-1 rounded 
+            opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 whitespace-nowrap shadow"
+                  >
+                    {logedInuser.displayName}
+                  </div>
+
+                  {/* Logout Button */}
+                  <button
+                    onClick={handleLogOutUser}
+                    className="absolute right-0 top-20 w-[120px] bg-red-500 text-white text-sm  
+            rounded px-3 py-1 opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 shadow"
+                  >
+                    Log out
+                  </button>
+                </div>
+              </div>
+            ) : (
+              // যদি ইউজার না থাকে, তাহলে userIcon দেখাও
+              <div className="w-10 h-10 flex items-center  justify-center text-2xl ">
+                <img className="rounded-full" src={userIcon} alt="" />
+              </div>
+            )}
           </div>
-          {/* {logedInuser ? (
-            <Link
-              onClick={handleLogOutUser}
-              className="btn bg-accent text-white "
-            >
-              Log out
-            </Link>
-          ) : (
-            <Link to="/auth/login" className="btn bg-accent text-white ">
-              Log In
-            </Link>
-          )} */}
         </div>
       </div>
     </>
