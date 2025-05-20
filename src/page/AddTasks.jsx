@@ -17,7 +17,19 @@ const AddTasks = () => {
       ...newTask,
       deadline: formattedDeadline,
     };
-    console.log(taskInfo);
+
+    fetch("http://localhost:5000/tasks", {
+      method: "POSt",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(taskInfo),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+    // console.log(taskInfo);
   };
   return (
     <div>
@@ -30,7 +42,7 @@ const AddTasks = () => {
       </p>
       <form
         onSubmit={handleAddTasks}
-        className="fieldset bg-base-100 border-base-300 rounded-box w-2xl border mx-auto my-4 p-4"
+        className="fieldset bg-base-100 border-base-300 rounded-box w-full md:w-xl lg:w-2xl border mx-auto my-4 p-4"
       >
         <label className="label">Name</label>
         <input

@@ -14,3 +14,8 @@
   --color-primary: #000000;
   --color-accent: #fe696a;
 }
+
+a.active {
+  background: black;
+  color: white;
+}
