@@ -6,6 +6,9 @@ import BrowseTasks from "../page/BrowseTasks";
 import MyPostedTasks from "../page/MyPostedTasks";
 import AddTasks from "../page/AddTasks";
 import SignUp from "../page/SignUp";
+import Login from "../components/Login";
+import PrivetRoute from "../components/PrivetRoute";
+import Loading from "../components/Loading";
 
 const Router = createBrowserRouter([
   {
@@ -20,10 +23,15 @@ const Router = createBrowserRouter([
           return data;
         },
         Component: Hero,
+        hydrateFallbackElement: <Loading></Loading>,
       },
       {
         path: "/add_task",
-        Component: AddTasks,
+        element: (
+          <PrivetRoute>
+            <AddTasks></AddTasks>
+          </PrivetRoute>
+        ),
       },
       {
         path: "/browse_tasks",
@@ -33,14 +41,23 @@ const Router = createBrowserRouter([
           return data;
         },
         Component: BrowseTasks,
+        hydrateFallbackElement: <Loading></Loading>,
       },
       {
         path: "/my_posted_tasks",
-        Component: MyPostedTasks,
+        element: (
+          <PrivetRoute>
+            <MyPostedTasks></MyPostedTasks>
+          </PrivetRoute>
+        ),
       },
       {
         path: "/auth/sign_up",
         Component: SignUp,
+      },
+      {
+        path: "/auth/login",
+        Component: Login,
       },
     ],
   },

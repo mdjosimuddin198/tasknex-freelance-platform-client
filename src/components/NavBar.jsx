@@ -1,26 +1,26 @@
-import React, { use } from "react";
+import React, { useContext } from "react";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { Link, NavLink } from "react-router";
 import userIcon from "../assets/user.png";
 import "../index.css";
-// import { AuthContext } from "../provider/AuthProvider";
-// import { toast } from "react-toastify";
+import { AuthContext } from "../context/AuthProvider";
+import { toast } from "react-toastify";
 // import { Helmet } from "react-helmet";
 
 const NavBar = () => {
-  //   const { logedInuser, setLogedInUser, logOutUser } = use(AuthContext);
-  //   const handleLogOutUser = () => {
-  //     logOutUser()
-  //       .then(() => {
-  //         // console.log("user log out successfully");
-  //         setLogedInUser(null);
-  //         toast.success("Log Out Successfully");
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //         toast.error("error found");
-  //       });
-  //   };
+  const { logedInuser, setLogedInUser, logOutUser } = useContext(AuthContext);
+  const handleLogOutUser = () => {
+    logOutUser()
+      .then(() => {
+        // console.log("user log out successfully");
+        setLogedInUser(null);
+        toast.success("Log Out Successfully");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("error found");
+      });
+  };
 
   const links = (
     <>
@@ -38,7 +38,10 @@ const NavBar = () => {
         My Posted Tasks
       </NavLink>
       <NavLink className="ml-5 p-2 rounded-xl  text-xl" to="/auth/sign_up">
-        Signup
+        {logedInuser ? "" : "Sign Up"}
+      </NavLink>
+      <NavLink className="ml-5 p-2 rounded-xl  text-xl" to="/auth/login">
+        {logedInuser ? "" : "LogIn"}
       </NavLink>
     </>
   );
@@ -58,12 +61,12 @@ const NavBar = () => {
             </ul>
           </div>
           <a className=" text-xl font-bold">
-            GreenBox <span className="text-base-200"> BD</span>
+            Task <span className="text-base-200"> Nex</span>
           </a>
           {/* {logedInuser && (
             <p className="text-red-400 text-2xl">{logedInuser.email}</p>
-          )} */}
-          {/* {logedInuser && (
+          )}
+          {logedInuser && (
             <p className="text-red-400 text-2xl">{logedInuser.displayName}</p>
           )} */}
         </div>
@@ -77,20 +80,18 @@ const NavBar = () => {
           >
             <img
               className="w-12 rounded-full"
-              // src={logedInuser ? logedInuser.photoURL : userIcon}
-              src={userIcon}
-              alt=""
+              src={logedInuser ? logedInuser.photoURL : userIcon}
             />
           </div>
           {/* {logedInuser ? (
             <Link
               onClick={handleLogOutUser}
-              className="btn bg-base-200 text-white "
+              className="btn bg-accent text-white "
             >
               Log out
             </Link>
           ) : (
-            <Link to="/auth/login" className="btn bg-base-200 text-white ">
+            <Link to="/auth/login" className="btn bg-accent text-white ">
               Log In
             </Link>
           )} */}

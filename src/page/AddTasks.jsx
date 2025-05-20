@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
+import { AuthContext } from "../context/AuthProvider";
+import { toast } from "react-toastify";
 
 const AddTasks = () => {
+  const { logedInuser } = useContext(AuthContext);
   const [deadline, setDeadline] = useState(null);
 
   const handleAddTasks = (e) => {
@@ -27,7 +30,9 @@ const AddTasks = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        if (data.insertedId) {
+          toast.success("Tasks Added Successfully");
+        }
       });
     // console.log(taskInfo);
   };
@@ -48,6 +53,7 @@ const AddTasks = () => {
         <input
           type="text"
           name="name"
+          value={logedInuser.displayName}
           className="input w-full"
           placeholder="Name"
         />
@@ -55,6 +61,7 @@ const AddTasks = () => {
         <input
           type="email"
           name="email"
+          value={logedInuser.email}
           className="input w-full"
           placeholder="Email"
         />

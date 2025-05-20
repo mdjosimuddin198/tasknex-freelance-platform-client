@@ -1,9 +1,10 @@
-import React, { use, useState } from "react";
+import React, { use, useContext, useState } from "react";
 import { Link, useNavigate } from "react-router";
-// import { AuthContext } from "../provider/AuthProvider";
+
 import { FiEyeOff } from "react-icons/fi";
 import { BsEye } from "react-icons/bs";
-// import { toast } from "react-toastify";
+import { AuthContext } from "../context/AuthProvider";
+import { toast } from "react-toastify";
 
 // import { Helmet } from "react-helmet";
 
@@ -11,7 +12,8 @@ const SignUp = () => {
   const navigate = useNavigate();
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState(false);
-  // const { creatAccount, updateUser, setLogedInUser } = use(AuthContext);
+  const { creatAccount, updateUser, setLogedInUser } = use(AuthContext);
+
   const [showPass, setShowPass] = useState(false);
 
   const handleshowPassword = () => {
@@ -30,13 +32,13 @@ const SignUp = () => {
 
     if (password.length < 6) {
       setErrorMsg("password must be 6 characters or longer ");
-      // toast.error(`password must be 6 characters or longer`);
+      toast.error(`password must be 6 characters or longer`);
     } else if (!/[A-Z]/.test(password)) {
       setErrorMsg("Password must contain at least one uppercase letter.");
-      // toast.error("Password must contain at least one uppercase letter.");
+      toast.error("Password must contain at least one uppercase letter.");
     } else if (!/[a-z]/.test(password)) {
       setErrorMsg(" Password must contain at least one lowercase letter.");
-      // toast.error(` Password must contain at least one lowercase letter`);
+      toast.error(` Password must contain at least one lowercase letter`);
     } else {
       creatAccount(email, password)
         .then((result) => {
@@ -54,11 +56,11 @@ const SignUp = () => {
         })
         .catch((error) => {
           console.log(error);
-          // toast.error("error found");
+          toast.error("error found");
         });
 
       setSuccessMsg(true);
-      // toast.success(`Account Create  SuccessFully `);
+      toast.success(`Account Create  SuccessFully `);
       navigate("/");
     }
 
