@@ -23,7 +23,7 @@ const Slider = ({ title }) => {
           </div>
         </div>
         <div className="md:w-[45%] w-full">
-          <img src="https://i.ibb.co/pjYZhspH/image.png" alt="" />
+          <img className="w-[450px] h-[350px]" src={title.image} alt="" />
         </div>
       </div>
     </>

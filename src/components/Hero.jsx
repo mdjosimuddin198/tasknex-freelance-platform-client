@@ -7,9 +7,9 @@ import Slider from "./Slider";
 
 const titles = [
   { id: 1, image: "https://i.ibb.co/pjYZhspH/image.png" },
-  { id: 2, image: "https://i.ibb.co/pjYZhspH/image.png" },
-  { id: 3, image: "https://i.ibb.co/pjYZhspH/image.png" },
-  { id: 4, image: "https://i.ibb.co/pjYZhspH/image.png" },
+  { id: 2, image: "https://i.ibb.co/chpmL5Q0/image.png" },
+  { id: 3, image: "https://i.ibb.co/5W8TKcXt/image.png" },
+  { id: 4, image: "https://i.ibb.co/FjwdWXS/image.png" },
 ];
 
 const Hero = () => {
