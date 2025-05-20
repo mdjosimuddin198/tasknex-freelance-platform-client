@@ -12,7 +12,15 @@ const Router = createBrowserRouter([
     path: "/",
     Component: MainLayout,
     children: [
-      { index: true, Component: Hero },
+      {
+        index: true,
+        loader: async () => {
+          const res = await fetch("http://localhost:5000/tasks");
+          const data = await res.json();
+          return data;
+        },
+        Component: Hero,
+      },
       {
         path: "/add_task",
         Component: AddTasks,

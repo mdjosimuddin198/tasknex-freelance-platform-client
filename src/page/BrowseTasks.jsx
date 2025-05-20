@@ -13,7 +13,7 @@ const BrowseTasks = () => {
       </p>
       <div className="space-y-3 my-4 mx-2">
         {data.map((job) => (
-          <JobCard job={job}></JobCard>
+          <JobCard key={job._id} job={job}></JobCard>
         ))}
       </div>
     </div>

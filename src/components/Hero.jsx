@@ -4,6 +4,8 @@ import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import Slider from "./Slider";
+import { useLoaderData } from "react-router";
+import TaskCard from "./TaskCard";
 
 const titles = [
   { id: 1, image: "https://i.ibb.co/pjYZhspH/image.png" },
@@ -13,6 +15,8 @@ const titles = [
 ];
 
 const Hero = () => {
+  const data = useLoaderData();
+  console.log(data);
   return (
     <>
       <Swiper
@@ -29,6 +33,11 @@ const Hero = () => {
           </SwiperSlide>
         ))}
       </Swiper>
+      <div className="grid grid-cols-1 my-6 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        {data.map((job) => (
+          <TaskCard key={job._id} job={job}></TaskCard>
+        ))}
+      </div>
     </>
   );
 };

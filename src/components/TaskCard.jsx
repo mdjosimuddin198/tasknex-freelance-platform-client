@@ -1,9 +1,9 @@
 import React from "react";
 import { FaCheckCircle } from "react-icons/fa";
 
-const JobCard = ({ job }) => {
+const TaskCard = ({ job }) => {
   return (
-    <div className="bg-white shadow rounded-xl p-6 w-full mx-auto  max-w-3xl">
+    <div className="bg-white shadow rounded-xl p-6 mx-2 md:w-[400px] md:mx-auto  max-w-3xl">
       <div className="flex justify-between items-start">
         <div>
           <div className="text-gray-400 text-sm flex items-center gap-3 font-semibold">
@@ -47,4 +47,4 @@ const JobCard = ({ job }) => {
   );
 };
 
-export default JobCard;
+export default TaskCard;
