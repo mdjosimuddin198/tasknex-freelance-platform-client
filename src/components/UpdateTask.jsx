@@ -2,11 +2,12 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import DatePicker from "react-datepicker";
 import { useLoaderData } from "react-router";
+import { toast } from "react-toastify";
 
 const UpdateTask = () => {
   const { logedInuser } = useContext(AuthContext);
   const [deadline, setDeadline] = useState(null);
-  const { budget, description, selsct, taskTitle } = useLoaderData();
+  const { _id, budget, description, selsct, taskTitle } = useLoaderData();
   const handleUpdateTask = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -19,8 +20,8 @@ const UpdateTask = () => {
       deadline: formattedDeadline,
     };
 
-    fetch("http://localhost:5000/tasks", {
-      method: "put",
+    fetch(`http://localhost:5000/alltasks/${_id}`, {
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
@@ -28,8 +29,8 @@ const UpdateTask = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.insertedId) {
-          toast.success("Tasks Added Successfully");
+        if (data.modifiedCount) {
+          toast.success("Tasks Updated Successfully");
         }
       });
     // console.log(taskInfo);
@@ -55,6 +56,7 @@ const UpdateTask = () => {
             value={logedInuser?.displayName}
             className="input w-full"
             placeholder="Name"
+            readOnly
           />
           <label className="label">Email</label>
           <input
@@ -63,6 +65,7 @@ const UpdateTask = () => {
             value={logedInuser?.email}
             className="input w-full"
             placeholder="Email"
+            readOnly
           />
           <label className="label">Task Title</label>
           <input
@@ -71,10 +74,12 @@ const UpdateTask = () => {
             defaultValue={taskTitle}
             className="input w-full"
             placeholder="Task Title"
+            required
           />
 
           <select
             name="selsct"
+            required
             defaultValue={selsct}
             className="dropdown-content menu bg-base-100 rounded z-1 w-full mt-2 p-2 shadow-sm"
           >
@@ -101,11 +106,13 @@ const UpdateTask = () => {
             <DatePicker
               id="deadline"
               selected={deadline}
+              defaultValue={deadline}
               onChange={(date) => setDeadline(date)}
               minDate={new Date()}
               placeholderText="Select a deadline"
               dateFormat="MMMM d, yyyy"
               className="border p-2 rounded-md w-full"
+              required
             />
             {deadline && (
               <p className="text-sm text-green-600 mt-1">
@@ -120,6 +127,7 @@ const UpdateTask = () => {
             defaultValue={budget}
             className="input w-full"
             placeholder="Budget"
+            required
           />
 
           <button className="btn btn-neutral mt-4">Update Tasks</button>
