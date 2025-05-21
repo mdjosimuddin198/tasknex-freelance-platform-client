@@ -11,16 +11,18 @@ import PrivetRoute from "../components/PrivetRoute";
 import Loading from "../components/Loading";
 import JobDetails from "../components/JobDetails";
 import UpdateTask from "../components/UpdateTask";
+import ErrorPage from "../page/ErrorPage";
 
 const Router = createBrowserRouter([
   {
     path: "/",
     Component: MainLayout,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         index: true,
         loader: async () => {
-          const res = await fetch("http://localhost:5000/tasks");
+          const res = await fetch("http://localhost:5000/alltasks");
           const data = await res.json();
           return data;
         },

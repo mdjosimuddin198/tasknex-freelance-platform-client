@@ -5,10 +5,12 @@ import { FiEyeOff } from "react-icons/fi";
 import { BsEye } from "react-icons/bs";
 import { AuthContext } from "../context/AuthProvider";
 import { toast } from "react-toastify";
+import { FcGoogle } from "react-icons/fc";
 
 // import { Helmet } from "react-helmet";
 
 const SignUp = () => {
+  const { handlegoogle } = useContext(AuthContext);
   const navigate = useNavigate();
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState(false);
@@ -66,6 +68,20 @@ const SignUp = () => {
 
     // console.log(name, photo, password, email);
     return;
+  };
+
+  const handleGoogoleLogin = () => {
+    // console.log("hello login ");
+    handlegoogle()
+      .then((result) => {
+        navigate(`${location.state ? location.state : "/"}`);
+        toast.success(`Loged In SuccessFully `);
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("error found");
+      });
   };
   return (
     <>
@@ -136,6 +152,14 @@ const SignUp = () => {
               <p className="text-green-500">Account have Create SuccessFully</p>
             )}
           </form>
+          {/* Login with google  */}
+          <button
+            onClick={handleGoogoleLogin}
+            className="btn bg-white text-black border-[#e5e5e5]"
+          >
+            <FcGoogle></FcGoogle>
+            Login with Google
+          </button>
         </div>
       </div>
     </>

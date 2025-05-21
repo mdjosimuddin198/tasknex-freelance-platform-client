@@ -14,6 +14,10 @@ const JobDetails = () => {
           <div className="text-gray-400 text-sm flex items-center gap-3 font-semibold">
             <FaCheckCircle className="mt-1" />{" "}
             <p className="text-xl">{job.name}</p>
+            <h3 className="ml-8 text-center">
+              Send Proposeal to :-
+              <span className=" text-accent"> {job.email}</span>
+            </h3>
           </div>
           <h2 className="text-xl font-semibold mt-1">{job.taskTitle}</h2>
           <div className="flex flex-wrap gap-2 mt-4">
@@ -22,6 +26,7 @@ const JobDetails = () => {
             </span>
           </div>
         </div>
+
         <div className="text-right">
           <p className="text-2xl font-bold">${job.budget}</p>
           <p className="text-sm text-gray-600 mt-1">(Fixed)</p>

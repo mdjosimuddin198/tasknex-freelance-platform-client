@@ -37,6 +37,12 @@ const Hero = () => {
           </SwiperSlide>
         ))}
       </Swiper>
+      <div className="m-4">
+        <h3 className="text-3xl font-bold">Our Lates Jobs</h3>
+        <p className="text-xl text-base-200">
+          Explore the most viewd jobs for today
+        </p>
+      </div>
       <div className="grid grid-cols-1 my-6 md:grid-cols-2 lg:grid-cols-3 gap-3">
         {tasks.map((job) => (
           <TaskCard key={job._id} job={job}></TaskCard>

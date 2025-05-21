@@ -21,7 +21,7 @@ const AddTasks = () => {
       deadline: formattedDeadline,
     };
 
-    fetch("http://localhost:5000/tasks", {
+    fetch("http://localhost:5000/alltasks", {
       method: "POSt",
       headers: {
         "content-type": "application/json",
@@ -56,6 +56,7 @@ const AddTasks = () => {
           value={logedInuser.displayName}
           className="input w-full"
           placeholder="Name"
+          readOnly
         />
         <label className="label">Email</label>
         <input
@@ -64,6 +65,7 @@ const AddTasks = () => {
           value={logedInuser.email}
           className="input w-full"
           placeholder="Email"
+          readOnly
         />
         <label className="label">Task Title</label>
         <input
@@ -71,10 +73,12 @@ const AddTasks = () => {
           name="taskTitle"
           className="input w-full"
           placeholder="Task Title"
+          required
         />
 
         <select
           name="selsct"
+          required
           className="dropdown-content menu bg-base-100 rounded z-1 w-full mt-2 p-2 shadow-sm"
         >
           <option value="Developer">Select One</option>
@@ -91,6 +95,7 @@ const AddTasks = () => {
           name="description"
           className="input w-full"
           placeholder="Description "
+          required
         />
         <div className="flex flex-col gap-2">
           <label htmlFor="deadline" className="font-medium text-gray-700">
@@ -104,6 +109,7 @@ const AddTasks = () => {
             placeholderText="Select a deadline"
             dateFormat="MMMM d, yyyy"
             className="border p-2 rounded-md w-full"
+            required
           />
           {deadline && (
             <p className="text-sm text-green-600 mt-1">
@@ -117,6 +123,7 @@ const AddTasks = () => {
           name="budget"
           className="input w-full"
           placeholder="Budget"
+          required
         />
 
         <button className="btn btn-neutral mt-4">Add Tasks</button>
