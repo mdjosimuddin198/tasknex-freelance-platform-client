@@ -45,6 +45,12 @@ const Router = createBrowserRouter([
       },
       {
         path: "/my_posted_tasks",
+        loader: async () => {
+          const res = await fetch("http://localhost:5000/alltasks");
+          const data = await res.json();
+
+          return data;
+        },
         element: (
           <PrivetRoute>
             <MyPostedTasks></MyPostedTasks>
