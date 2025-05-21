@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useLoaderData } from "react-router";
+import { Link, useLoaderData } from "react-router";
 import { AuthContext } from "../context/AuthProvider";
 import { MdDeleteOutline } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
@@ -56,10 +56,13 @@ const MyPostedTasks = () => {
                     {" "}
                     <FaRegHeart />
                   </button>
-                  <button className="btn btn-accent text-white text-[15px]">
+                  <Link
+                    to={`/update_task/${post._id}`}
+                    className="btn btn-accent text-white text-[15px]"
+                  >
                     {" "}
                     <CiEdit />
-                  </button>
+                  </Link>
                   <button
                     onClick={() => handleDeleteUser(post._id)}
                     className="btn btn-accent  text-white text-[15px]"

@@ -47,7 +47,7 @@ const JobCard = ({ job }) => {
             See Details
           </button> */}
           <Link
-            to={"/post/details"}
+            to={`/post/details/${job._id}`}
             className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded"
           >
             See Details

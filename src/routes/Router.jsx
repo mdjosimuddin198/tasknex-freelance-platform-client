@@ -9,6 +9,8 @@ import SignUp from "../page/SignUp";
 import Login from "../components/Login";
 import PrivetRoute from "../components/PrivetRoute";
 import Loading from "../components/Loading";
+import JobDetails from "../components/JobDetails";
+import UpdateTask from "../components/UpdateTask";
 
 const Router = createBrowserRouter([
   {
@@ -54,6 +56,39 @@ const Router = createBrowserRouter([
         element: (
           <PrivetRoute>
             <MyPostedTasks></MyPostedTasks>
+          </PrivetRoute>
+        ),
+        hydrateFallbackElement: <Loading></Loading>,
+      },
+      {
+        path: "/post/details/:id",
+        loader: async ({ params }) => {
+          const res = await fetch(
+            `http://localhost:5000/alltasks/${params.id}`
+          );
+          const data = await res.json();
+          return data;
+        },
+        element: (
+          <PrivetRoute>
+            <JobDetails></JobDetails>
+          </PrivetRoute>
+        ),
+
+        hydrateFallbackElement: <Loading></Loading>,
+      },
+      {
+        path: "/update_task/:id",
+        loader: async ({ params }) => {
+          const res = await fetch(
+            `http://localhost:5000/alltasks/${params.id}`
+          );
+          const data = await res.json();
+          return data;
+        },
+        element: (
+          <PrivetRoute>
+            <UpdateTask></UpdateTask>
           </PrivetRoute>
         ),
       },

@@ -20,6 +20,7 @@ const Hero = () => {
   const allTasks = useLoaderData();
   const tasks = allTasks.filter((task) => task.email !== logedInuser?.email);
   console.log(allTasks);
+  console.log("filter task is", tasks);
   return (
     <>
       <Swiper
