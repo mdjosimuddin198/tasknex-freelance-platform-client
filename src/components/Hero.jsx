@@ -7,6 +7,7 @@ import Slider from "./Slider";
 import { useLoaderData } from "react-router";
 import TaskCard from "./TaskCard";
 import { AuthContext } from "../context/AuthProvider";
+import WhyChooseUs from "./WhyChooseUs";
 
 const titles = [
   { id: 1, image: "https://i.ibb.co/pjYZhspH/image.png" },
@@ -48,6 +49,7 @@ const Hero = () => {
           <TaskCard key={job._id} job={job}></TaskCard>
         ))}
       </div>
+      <WhyChooseUs></WhyChooseUs>
     </>
   );
 };
