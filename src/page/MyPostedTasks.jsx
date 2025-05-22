@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router";
 import { AuthContext } from "../context/AuthProvider";
 import { MdDeleteOutline } from "react-icons/md";
@@ -16,6 +16,28 @@ const MyPostedTasks = () => {
 
   const [taskDel, setTaskDel] = useState(myPost);
   // console.log(taskDel);
+  const [bids, setBids] = useState([]);
+  const [postCount, setPostCount] = useState(0);
+  const [allBids, setAllBids] = useState([]);
+
+  const handelBits = (id) => {
+    const userBids = bids.filter((bid) => bid.userId === id);
+    setAllBids(userBids);
+    document.getElementById("my_modal_1").showModal();
+  };
+
+  useEffect(() => {
+    const fetchPostCount = async () => {
+      fetch("http://localhost:5000/bids")
+        .then((res) => res.json())
+        .then((data) => {
+          // console.log(data);
+          setBids(data);
+        });
+    };
+
+    fetchPostCount();
+  }, [logedInuser._id]); //
 
   const handleDeleteUser = (id) => {
     // console.log(id);
@@ -73,7 +95,9 @@ const MyPostedTasks = () => {
         </div>
       ) : (
         <div>
-          <h3>My Total Post : {taskDel.length} </h3>
+          <h3 className="text-3xl text-center ">
+            My Total Post : {taskDel.length}{" "}
+          </h3>
           <div className="overflow-x-auto ">
             <table className="table min-w-full ">
               {/* head */}
@@ -110,7 +134,10 @@ const MyPostedTasks = () => {
                     <td>${post.budget}</td>
                     <td>{post.selsct}</td>
                     <th className="space-x-1.5 space-y-1.5">
-                      <button className="btn btn-accent text-white text-[15px]">
+                      <button
+                        onClick={() => handelBits(post._id)}
+                        className="btn btn-accent text-white text-[15px]"
+                      >
                         {" "}
                         <FaRegHeart />
                       </button>
@@ -135,6 +162,26 @@ const MyPostedTasks = () => {
           </div>
         </div>
       )}
+      <dialog id="my_modal_1" className="modal ">
+        <div className="modal-box bg-white">
+          {allBids.map((bid) => (
+            <div key={bid._id} className="bg-white p-4 rounded-lg shadow mb-3">
+              <h3 className="font-bold">Bid ID: {bid._id}</h3>
+              <p>Bids Received: {bid.count || "0"}</p>
+            </div>
+          ))}
+
+          {allBids.length === 0 && (
+            <p className="text-accent">No bids available yet</p>
+          )}
+          <div className="modal-action">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </>
   );
 };

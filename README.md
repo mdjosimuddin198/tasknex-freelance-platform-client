@@ -1,14 +1,28 @@
-# TaskNex - Freelancer Platform
+# 💼 TaskNex - Freelance Bidding Platform
 
-🌐 **Live Site:**
+🌐 **Live Site URL:** [https://tasknex-dcccf.web.app/](https://tasknex-dcccf.web.app/)
 
 ---
 
-## 🚀 Features
+## ✨ Key Features
 
-- 🔐 **User Authentication:** Sign up, log in, and manage your account securely with Firebase authentication.
-- 📝 **Post a Task:** Users can post new freelance tasks by providing details like title, category, description, budget, and deadline.
-- 📬 **Bidding System:** Freelancers can bid on tasks and see how many bids they've placed.
-- 📄 **Task Management:** Users can view, update, or delete their own posted tasks in a dedicated dashboard.
+- 🔐 **User Authentication**: Sign up and login functionality using Firebase Authentication.
+- 📤 **Post a Task**: Clients can post tasks/projects with title, budget, category, and deadline.
+- 💬 **Bid System**: Freelancers can place bids on tasks with real-time bid count updates.
+- 🎨 **Dark/Light Mode**: Seamless UI theme switching with Tailwind CSS dark mode support.
+- 📊 **My Posted Tasks Panel**: Logged-in users can view and manage all their posted jobs with bid counts.
+- 📝 **Reviews Section**: Display reviews from previous clients/freelancers on the home page.
+- 🔍 **Responsive UI**: Fully responsive across devices using Tailwind CSS utility-first design.
 
-✨ Built with React, Tailwind CSS, Firebase, and MongoDB.
+---
+
+## 🛠️ Technologies & Packages Used
+
+- **React** – Frontend library
+- **React Router DOM** – Client-side routing
+- **Firebase** – Authentication and hosting
+- **Express.js & MongoDB** – Backend API and database
+- **Tailwind CSS** – Styling framework with dark mode support
+- **React Toastify** – Toast notifications -**Date fans** - For DatePicker -**React Awesome reveal** - for nice scroll behavior , etc.
+
+---
