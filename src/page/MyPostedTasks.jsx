@@ -74,8 +74,8 @@ const MyPostedTasks = () => {
       ) : (
         <div>
           <h3>My Total Post : {taskDel.length} </h3>
-          <div className="overflow-x-auto">
-            <table className="table">
+          <div className="overflow-x-auto ">
+            <table className="table min-w-full ">
               {/* head */}
               <thead>
                 <tr>
@@ -109,7 +109,7 @@ const MyPostedTasks = () => {
                     </td>
                     <td>${post.budget}</td>
                     <td>{post.selsct}</td>
-                    <th className="space-x-1.5">
+                    <th className="space-x-1.5 space-y-1.5">
                       <button className="btn btn-accent text-white text-[15px]">
                         {" "}
                         <FaRegHeart />
