@@ -21,7 +21,7 @@ const AddTasks = () => {
       deadline: formattedDeadline,
     };
 
-    fetch("https://task-nex-server.vercel.app/alltasks", {
+    fetch("http://localhost:5000/alltasks", {
       method: "POSt",
       headers: {
         "content-type": "application/json",
