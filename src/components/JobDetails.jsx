@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
 import { IoIosSend, IoMdArrowRoundBack } from "react-icons/io";
@@ -6,9 +6,29 @@ import { Link, useLoaderData } from "react-router";
 
 const JobDetails = () => {
   const job = useLoaderData();
-  // console.log(job);
+  const [bidsCount, setBidsCount] = useState(0);
+
+  console.log(job._id);
+  useEffect(() => {
+    fetch(`http://localhost:5000/bids/${job._id}`)
+      .then((res) => res.json())
+      .then((data) => setBidsCount(data.count));
+  }, [job._id]);
+
+  const handleBidClick = () => {
+    fetch(`http://localhost:5000/bids/${job._id}`, { method: "POST" })
+      .then((res) => res.json())
+      .then((data) => setBidsCount((prev) => prev + 1));
+  };
+
   return (
     <div className="bg-white shadow rounded-xl my-4 p-6 w-full mx-auto  max-w-3xl">
+      <h2 className="text-xl text-center">
+        You bid for{" "}
+        <span className="text-accent font-semibold">{bidsCount}</span>{" "}
+        opportunities.
+      </h2>
+
       <div className="flex justify-between items-start">
         <div>
           <div className="text-gray-400 text-sm flex items-center gap-3 font-semibold">
@@ -42,7 +62,10 @@ const JobDetails = () => {
         </p>
         <p>Project Id : {job._id}</p>
         <div className="flex flex-col md:flex-row items-center gap-2">
-          <button className="text-gray-400 text-xl hover:text-gray-600">
+          <button
+            onClick={handleBidClick}
+            className="text-gray-400 text-xl hover:text-gray-600"
+          >
             <FaRegHeart />
           </button>
 

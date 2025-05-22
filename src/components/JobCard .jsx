@@ -37,9 +37,9 @@ const JobCard = ({ job }) => {
         </p>
 
         <div className="flex items-center gap-2">
-          <button className="text-gray-400 text-xl hover:text-gray-600">
+          {/* <button className="text-gray-400 text-xl hover:text-gray-600">
             <FaRegHeart />
-          </button>
+          </button> */}
           {/* <button
             onClick={() => setShowFull(!showFull)}
             className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded"

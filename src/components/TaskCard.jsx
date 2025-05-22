@@ -35,9 +35,6 @@ const TaskCard = ({ job }) => {
         </p>
 
         <div className="flex items-center gap-2">
-          <button className="text-gray-400 text-xl hover:text-gray-600">
-            ♡
-          </button>
           <button className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded">
             Send Proposal
           </button>
