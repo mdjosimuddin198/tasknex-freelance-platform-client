@@ -22,7 +22,9 @@ const Router = createBrowserRouter([
       {
         index: true,
         loader: async () => {
-          const res = await fetch("http://localhost:5000/alltasks");
+          const res = await fetch(
+            "https://task-nex-server.vercel.app/alltasks"
+          );
           const data = await res.json();
           return data;
         },
@@ -40,7 +42,9 @@ const Router = createBrowserRouter([
       {
         path: "/browse_tasks",
         loader: async () => {
-          const res = await fetch("http://localhost:5000/alltasks");
+          const res = await fetch(
+            "https://task-nex-server.vercel.app/alltasks"
+          );
           const data = await res.json();
           return data;
         },
@@ -50,7 +54,9 @@ const Router = createBrowserRouter([
       {
         path: "/my_posted_tasks",
         loader: async () => {
-          const res = await fetch("http://localhost:5000/alltasks");
+          const res = await fetch(
+            "https://task-nex-server.vercel.app/alltasks"
+          );
           const data = await res.json();
 
           return data;
@@ -66,7 +72,7 @@ const Router = createBrowserRouter([
         path: "/post/details/:id",
         loader: async ({ params }) => {
           const res = await fetch(
-            `http://localhost:5000/alltasks/${params.id}`
+            `https://task-nex-server.vercel.app/alltasks/${params.id}`
           );
           const data = await res.json();
           return data;
@@ -83,7 +89,7 @@ const Router = createBrowserRouter([
         path: "/update_task/:id",
         loader: async ({ params }) => {
           const res = await fetch(
-            `http://localhost:5000/alltasks/${params.id}`
+            `https://task-nex-server.vercel.app/alltasks/${params.id}`
           );
           const data = await res.json();
           return data;
