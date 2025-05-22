@@ -76,7 +76,7 @@ const SignUp = () => {
       .then((result) => {
         navigate(`${location.state ? location.state : "/"}`);
         toast.success(`Loged In SuccessFully `);
-        console.log(result);
+        // console.log(result);
       })
       .catch((error) => {
         console.log(error);

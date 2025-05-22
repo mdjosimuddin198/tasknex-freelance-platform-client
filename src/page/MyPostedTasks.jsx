@@ -15,10 +15,10 @@ const MyPostedTasks = () => {
   );
 
   const [taskDel, setTaskDel] = useState(myPost);
-  console.log(taskDel);
+  // console.log(taskDel);
 
   const handleDeleteUser = (id) => {
-    console.log(id);
+    // console.log(id);
 
     Swal.fire({
       title: "Are you sure?",
@@ -35,7 +35,7 @@ const MyPostedTasks = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            // console.log(data);
           });
 
         Swal.fire({
@@ -48,7 +48,7 @@ const MyPostedTasks = () => {
       }
     });
   };
-  console.log(myPost);
+  // console.log(myPost);
   return (
     <>
       {taskDel.length === 0 ? (

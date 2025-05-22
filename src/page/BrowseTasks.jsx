@@ -4,7 +4,7 @@ import JobCard from "../components/JobCard ";
 
 const BrowseTasks = () => {
   const data = useLoaderData();
-  console.log(data);
+  // console.log(data);
   return (
     <div>
       <h3 className="text-3xl text-center font-bold py-3">Our Lates Jobs </h3>

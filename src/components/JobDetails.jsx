@@ -6,7 +6,7 @@ import { Link, useLoaderData } from "react-router";
 
 const JobDetails = () => {
   const job = useLoaderData();
-  console.log(job);
+  // console.log(job);
   return (
     <div className="bg-white shadow rounded-xl my-4 p-6 w-full mx-auto  max-w-3xl">
       <div className="flex justify-between items-start">
