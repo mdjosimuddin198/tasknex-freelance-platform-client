@@ -8,6 +8,7 @@ import { useLoaderData } from "react-router";
 import TaskCard from "./TaskCard";
 import { AuthContext } from "../context/AuthProvider";
 import WhyChooseUs from "./WhyChooseUs";
+import ReviewSection from "./ReviewSection";
 
 const titles = [
   { id: 1, image: "https://i.ibb.co/pjYZhspH/image.png" },
@@ -50,6 +51,7 @@ const Hero = () => {
         ))}
       </div>
       <WhyChooseUs></WhyChooseUs>
+      <ReviewSection></ReviewSection>
     </>
   );
 };
