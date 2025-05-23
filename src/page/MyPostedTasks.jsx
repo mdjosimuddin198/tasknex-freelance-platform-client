@@ -28,7 +28,7 @@ const MyPostedTasks = () => {
 
   useEffect(() => {
     const fetchPostCount = async () => {
-      fetch("http://localhost:5000/bids")
+      fetch("https://task-nex-server.vercel.app/bids")
         .then((res) => res.json())
         .then((data) => {
           // console.log(data);
@@ -52,7 +52,7 @@ const MyPostedTasks = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/alltasks/${id}`, {
+        fetch(`https://task-nex-server.vercel.app/alltasks/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

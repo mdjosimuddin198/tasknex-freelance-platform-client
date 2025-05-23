@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
+import { Link } from "react-router";
 
 const TaskCard = ({ job }) => {
+  const [showFull, setShowFull] = useState(false);
   return (
     <div className="bg-white shadow rounded-xl p-6 mx-2 md:w-[400px] md:mx-auto  max-w-3xl">
       <div className="flex justify-between items-start">
@@ -23,21 +25,23 @@ const TaskCard = ({ job }) => {
         </div>
       </div>
 
-      <p className="mt-4 text-gray-700">{job.description}</p>
+      <p className="mt-4 text-gray-700">
+        {showFull ? job.description : `${job.description.slice(0, 100)}.....`}
+      </p>
 
       <div className="border-t mt-4 pt-4 flex justify-between items-center text-sm text-gray-600">
         <p>
           <span className="font-semibold">Expiry:</span>{" "}
           {new Date(job.deadline).toLocaleDateString()}
         </p>
-        <p>
-          <span className="font-semibold">Proposals</span> 1 Received
-        </p>
 
         <div className="flex items-center gap-2">
-          <button className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded">
-            Send Proposal
-          </button>
+          <Link
+            to={`/post/details/${job._id}`}
+            className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded"
+          >
+            See Details
+          </Link>
         </div>
       </div>
     </div>

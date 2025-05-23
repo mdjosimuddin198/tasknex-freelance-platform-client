@@ -21,7 +21,7 @@ const AddTasks = () => {
       deadline: formattedDeadline,
     };
 
-    fetch("http://localhost:5000/alltasks", {
+    fetch("https://task-nex-server.vercel.app/alltasks", {
       method: "POSt",
       headers: {
         "content-type": "application/json",
@@ -32,6 +32,7 @@ const AddTasks = () => {
       .then((data) => {
         if (data.insertedId) {
           toast.success("Tasks Added Successfully");
+          form.reset();
         }
       });
     // console.log(taskInfo);

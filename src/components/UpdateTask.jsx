@@ -20,7 +20,7 @@ const UpdateTask = () => {
       deadline: formattedDeadline,
     };
 
-    fetch(`http://localhost:5000/alltasks/${_id}`, {
+    fetch(`https://task-nex-server.vercel.app/alltasks/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -106,7 +106,6 @@ const UpdateTask = () => {
             <DatePicker
               id="deadline"
               selected={deadline}
-              defaultValue={deadline}
               onChange={(date) => setDeadline(date)}
               minDate={new Date()}
               placeholderText="Select a deadline"

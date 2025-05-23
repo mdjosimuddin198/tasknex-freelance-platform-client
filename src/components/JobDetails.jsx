@@ -10,13 +10,15 @@ const JobDetails = () => {
 
   console.log(job._id);
   useEffect(() => {
-    fetch(`http://localhost:5000/bids/${job._id}`)
+    fetch(`https://task-nex-server.vercel.app/bids/${job._id}`)
       .then((res) => res.json())
       .then((data) => setBidsCount(data.count));
   }, [job._id]);
 
   const handleBidClick = () => {
-    fetch(`http://localhost:5000/bids/${job._id}`, { method: "POST" })
+    fetch(`https://task-nex-server.vercel.app/bids/${job._id}`, {
+      method: "POST",
+    })
       .then((res) => res.json())
       .then((data) => setBidsCount((prev) => prev + 1));
   };
