@@ -9,6 +9,8 @@ import TaskCard from "./TaskCard";
 import { AuthContext } from "../context/AuthProvider";
 import WhyChooseUs from "./WhyChooseUs";
 import ReviewSection from "./ReviewSection";
+import Newsletter from "./Newsletter";
+import BlogSection from "./BlogSection";
 
 const titles = [
   { id: 1, image: "https://i.ibb.co/pjYZhspH/image.png" },
@@ -39,8 +41,8 @@ const Hero = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="m-4">
-        <h3 className="text-3xl font-bold">Our Lates Jobs</h3>
+      <div className="my-2 text-center">
+        <h3 className="text-5xl font-bold">Our Lates Jobs</h3>
         <p className="text-xl text-base-200">
           Explore the most viewd jobs for today
         </p>
@@ -52,6 +54,8 @@ const Hero = () => {
       </div>
       <WhyChooseUs></WhyChooseUs>
       <ReviewSection></ReviewSection>
+      <BlogSection></BlogSection>
+      <Newsletter></Newsletter>
     </>
   );
 };

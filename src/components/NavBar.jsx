@@ -38,6 +38,9 @@ const NavBar = () => {
       <NavLink className="ml-5 p-2 rounded-xl text-xl" to="/about_us">
         About US
       </NavLink>
+      <NavLink className="ml-5 p-2 rounded-xl text-xl" to="/contact_us">
+        Contact Us
+      </NavLink>
       <NavLink className="ml-5 p-2 rounded-xl  text-xl" to="/my_posted_tasks">
         My Posted Tasks
       </NavLink>

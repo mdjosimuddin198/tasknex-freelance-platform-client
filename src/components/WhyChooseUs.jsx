@@ -10,7 +10,7 @@ const WhyChooseUs = () => {
   };
 
   return (
-    <section className="bg-gray-100 py-20 px-6 md:px-12">
+    <section className="bg-gray-200 rounded-2xl py-8 px-6 md:px-12">
       <Fade
         direction="up"
         cascade
@@ -19,7 +19,7 @@ const WhyChooseUs = () => {
         onVisibilityChange={handleVisibility}
       >
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold  mb-4">Why Choose Tasknex?</h2>
+          <h2 className="text-5xl font-bold  mb-4">Why Choose Tasknex?</h2>
           <p className="text-base-200 text-lg mb-8">
             We connect you with the right freelancers, fast and securely.
           </p>

@@ -13,6 +13,7 @@ import JobDetails from "../components/JobDetails";
 import UpdateTask from "../components/UpdateTask";
 import ErrorPage from "../page/ErrorPage";
 import AboutUs from "../page/AboutUs";
+import ContactPage from "../page/ContactPage";
 
 const Router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ const Router = createBrowserRouter([
       {
         path: "about_us",
         Component: AboutUs,
+      },
+      {
+        path: "contact_us",
+        Component: ContactPage,
       },
       {
         path: "/my_posted_tasks",
