@@ -14,7 +14,7 @@ const BrowseTasks = () => {
       <h3 className="text-xl text-center font-bold py-3">
         Total Task Find : {data.length}
       </h3>
-      <div className="space-y-3 my-4 mx-2">
+      <div className="space-y-3 grid grid-cols-3 gap-4 my-4 mx-2">
         {data.map((job) => (
           <JobCard key={job._id} job={job}></JobCard>
         ))}

@@ -5,10 +5,17 @@ import { Link } from "react-router";
 const TaskCard = ({ job }) => {
   const [showFull, setShowFull] = useState(false);
   return (
-    <div className="bg-white shadow rounded-xl p-6 mx-2 md:w-[400px] md:mx-auto  max-w-3xl">
+    <div className="bg-white shadow rounded-xl p-6 mx-2  md:mx-auto  max-w-3xl">
+      <div className="">
+        <img
+          className="hover:scale-120 transition-all w-full h-[200px] object-cover rounded-lg  "
+          src={job.image}
+          alt=""
+        />
+      </div>
       <div className="flex justify-between items-start">
         <div>
-          <div className="text-gray-400 text-sm flex items-center gap-3 font-semibold">
+          <div className="text-gray-400  text-sm flex items-center gap-3 font-semibold">
             <FaCheckCircle className="mt-1" />{" "}
             <p className="text-xl">{job.name}</p>
           </div>

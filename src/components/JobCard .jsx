@@ -7,6 +7,13 @@ const JobCard = ({ job }) => {
   const [showFull, setShowFull] = useState(false);
   return (
     <div className="bg-white shadow rounded-xl p-6 w-full mx-auto  max-w-3xl">
+      <div className="">
+        <img
+          className="hover:scale-120 transition-all w-full h-[200px] object-cover rounded-lg  "
+          src={job.image}
+          alt=""
+        />
+      </div>
       <div className="flex justify-between items-start">
         <div>
           <div className="text-gray-400 text-sm flex items-center gap-3 font-semibold">

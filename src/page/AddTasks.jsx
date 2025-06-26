@@ -76,6 +76,14 @@ const AddTasks = () => {
           placeholder="Task Title"
           required
         />
+        <label className="label">Task Image URL</label>
+        <input
+          type="url"
+          name="image"
+          className="input w-full"
+          placeholder="Task Image Url"
+          required
+        />
 
         <select
           name="selsct"

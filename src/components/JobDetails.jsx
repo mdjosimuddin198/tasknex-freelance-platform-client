@@ -24,13 +24,19 @@ const JobDetails = () => {
   };
 
   return (
-    <div className="bg-white shadow rounded-xl my-4 p-6 w-full mx-auto  max-w-3xl">
-      <h2 className="text-xl text-center">
+    <div className="bg-white shadow rounded-xl my-4  w-full mx-auto py-4  px-6">
+      <h2 className="text-xl mb-2 text-center">
         You bid for{" "}
         <span className="text-accent font-semibold">{bidsCount}</span>{" "}
         opportunities.
       </h2>
-
+      <div className="">
+        <img
+          className=" w-full h-[350px] object-cover rounded-lg  "
+          src={job.image}
+          alt=""
+        />
+      </div>
       <div className="flex justify-between items-start">
         <div>
           <div className="text-gray-400 text-sm flex items-center gap-3 font-semibold">
@@ -62,7 +68,7 @@ const JobDetails = () => {
           <span className="font-semibold ">Expiry Date:</span>
           <span> {new Date(job.deadline).toLocaleDateString()}</span>
         </p>
-        <p>Project Id : {job._id}</p>
+        {/* <p>Project Id : {job._id}</p> */}
         <div className="flex flex-col md:flex-row items-center gap-2">
           <button
             onClick={handleBidClick}

@@ -3,7 +3,7 @@ import React from "react";
 const Slider = ({ title }) => {
   return (
     <>
-      <div className="flex flex-col md:flex-row justify-between px-2   items-center py-4 my-2">
+      <div className="flex flex-col md:flex-row justify-between border-3  items-center py-4 my-2">
         <div className="md:w-[45%] w-full   text-4xl ml-4 text-primary font-bold  space-y-3">
           <h3>Empowering the Next </h3>
           <h2> Generation of Freelancers</h2>

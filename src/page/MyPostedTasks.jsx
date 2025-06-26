@@ -120,7 +120,7 @@ const MyPostedTasks = () => {
                         <div className="avatar">
                           <div className="mask mask-squircle h-12 w-12">
                             <img
-                              src={logedInuser.photoURL}
+                              src={post.image}
                               alt="Avatar Tailwind CSS Component"
                             />
                           </div>
