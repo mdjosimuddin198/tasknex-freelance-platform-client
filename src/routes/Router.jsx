@@ -15,6 +15,7 @@ import ErrorPage from "../page/ErrorPage";
 import AboutUs from "../page/AboutUs";
 import ContactPage from "../page/ContactPage";
 import MyProfile from "../components/MyProfile";
+import Dashboard from "../page/Dashboard";
 
 const Router = createBrowserRouter([
   {
@@ -34,14 +35,14 @@ const Router = createBrowserRouter([
         Component: Hero,
         hydrateFallbackElement: <Loading></Loading>,
       },
-      {
-        path: "/add_task",
-        element: (
-          <PrivetRoute>
-            <AddTasks></AddTasks>
-          </PrivetRoute>
-        ),
-      },
+      // {
+      //   path: "/add_task",
+      //   element: (
+      //     <PrivetRoute>
+      //       <AddTasks></AddTasks>
+      //     </PrivetRoute>
+      //   ),
+      // },
       {
         path: "/browse_tasks",
         loader: async () => {
@@ -70,23 +71,23 @@ const Router = createBrowserRouter([
           </PrivetRoute>
         ),
       },
-      {
-        path: "/my_posted_tasks",
-        loader: async () => {
-          const res = await fetch(
-            "https://task-nex-server.vercel.app/alltasks"
-          );
-          const data = await res.json();
+      // {
+      //   path: "/my_posted_tasks",
+      //   loader: async () => {
+      //     const res = await fetch(
+      //       "https://task-nex-server.vercel.app/alltasks"
+      //     );
+      //     const data = await res.json();
 
-          return data;
-        },
-        element: (
-          <PrivetRoute>
-            <MyPostedTasks></MyPostedTasks>
-          </PrivetRoute>
-        ),
-        hydrateFallbackElement: <Loading></Loading>,
-      },
+      //     return data;
+      //   },
+      //   element: (
+      //     <PrivetRoute>
+      //       <MyPostedTasks></MyPostedTasks>
+      //     </PrivetRoute>
+      //   ),
+      //   hydrateFallbackElement: <Loading></Loading>,
+      // },
       {
         path: "/post/details/:id",
         loader: async ({ params }) => {
@@ -126,6 +127,47 @@ const Router = createBrowserRouter([
       {
         path: "/auth/login",
         Component: Login,
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    loader: async () => {
+      const res = await fetch("https://task-nex-server.vercel.app/alltasks");
+      const data = await res.json();
+      return data;
+    },
+    hydrateFallbackElement: <Loading></Loading>,
+    element: (
+      <PrivetRoute>
+        <Dashboard></Dashboard>
+      </PrivetRoute>
+    ),
+    children: [
+      {
+        path: "my_posted_tasks",
+        loader: async () => {
+          const res = await fetch(
+            "https://task-nex-server.vercel.app/alltasks"
+          );
+          const data = await res.json();
+
+          return data;
+        },
+        element: (
+          <PrivetRoute>
+            <MyPostedTasks></MyPostedTasks>
+          </PrivetRoute>
+        ),
+        hydrateFallbackElement: <Loading></Loading>,
+      },
+      {
+        path: "add_task",
+        element: (
+          <PrivetRoute>
+            <AddTasks></AddTasks>
+          </PrivetRoute>
+        ),
       },
     ],
   },

@@ -10,7 +10,7 @@ const MyPostedTasks = () => {
   const { logedInuser } = useContext(AuthContext);
   const allUserDatas = useLoaderData();
   // console.log(allUserDatas);
-  const myPost = allUserDatas.filter(
+  const myPost = allUserDatas?.filter(
     (task) => task.email === logedInuser?.email
   );
 
@@ -65,7 +65,7 @@ const MyPostedTasks = () => {
           text: "Your Post has been deleted.",
           icon: "success",
         });
-        const remainingPost = taskDel.filter((task) => task._id !== id);
+        const remainingPost = taskDel?.filter((task) => task._id !== id);
         setTaskDel(remainingPost);
       }
     });
@@ -73,7 +73,7 @@ const MyPostedTasks = () => {
   // console.log(myPost);
   return (
     <>
-      {taskDel.length === 0 ? (
+      {taskDel?.length === 0 ? (
         <div className="flex flex-col items-center justify-center min-h-[300px] bg-gray-50 rounded-xl shadow-inner text-center p-6 animate-fade-in">
           <img
             src="https://cdn-icons-png.flaticon.com/512/4076/4076549.png"
@@ -87,7 +87,7 @@ const MyPostedTasks = () => {
             Start by sharing your first post with the community.
           </p>
           <Link
-            to={"/add_task"}
+            to={"/dashboard/add_task"}
             className="px-4 py-2 bg-accent text-white rounded-lg transition"
           >
             Create A Post
