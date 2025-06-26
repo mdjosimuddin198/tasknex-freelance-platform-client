@@ -6,12 +6,15 @@ const Footer = () => {
     <footer className="footer bg-base-100 rounded-2xl my-4 grid-cols-3  py-4 px-2">
       <nav>
         <h6 className="footer-title">Company</h6>
-        <Link to="about_us" className="link link-hover">
+        <Link to="/about_us" className="link link-hover">
           About us
         </Link>
-        <Link className="link link-hover">Contact</Link>
-        <Link className="link link-hover">Jobs</Link>
-        <Link className="link link-hover">Press kit</Link>
+        <Link to="/contact_us" className="link link-hover">
+          Contact
+        </Link>
+        <Link to="/browse_tasks" className="link link-hover">
+          Jobs
+        </Link>
       </nav>
 
       <nav>

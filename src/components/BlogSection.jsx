@@ -55,7 +55,10 @@ const BlogSection = () => {
               <h2 className="card-title">{blog.title}</h2>
               <p>{blog.description}</p>
               <div className="card-actions justify-end">
-                <button onClick={handleRead} className="btn btn-primary btn-sm">
+                <button
+                  onClick={handleRead}
+                  className="btn btn-accent text-white btn-sm"
+                >
                   Read More
                 </button>
               </div>

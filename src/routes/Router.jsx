@@ -14,6 +14,7 @@ import UpdateTask from "../components/UpdateTask";
 import ErrorPage from "../page/ErrorPage";
 import AboutUs from "../page/AboutUs";
 import ContactPage from "../page/ContactPage";
+import MyProfile from "../components/MyProfile";
 
 const Router = createBrowserRouter([
   {
@@ -60,6 +61,14 @@ const Router = createBrowserRouter([
       {
         path: "contact_us",
         Component: ContactPage,
+      },
+      {
+        path: "profile",
+        element: (
+          <PrivetRoute>
+            <MyProfile></MyProfile>
+          </PrivetRoute>
+        ),
       },
       {
         path: "/my_posted_tasks",

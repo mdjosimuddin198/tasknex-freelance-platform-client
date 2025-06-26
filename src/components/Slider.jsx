@@ -17,12 +17,9 @@ const Slider = ({ title }) => {
             than ever before.
           </p>
           <div className="space-x-3">
-            <Link
-              to="/auth/sign_up"
-              className="btn bg-accent btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl"
-            >
+            <button className="btn bg-accent btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">
               {logedInuser ? "Wellcome Back" : "Join Now"}
-            </Link>
+            </button>
             <Link
               to="/browse_tasks"
               className="btn bg-accent btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl"

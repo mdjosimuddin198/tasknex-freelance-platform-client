@@ -31,7 +31,10 @@ const Newsletter = () => {
           className="input input-bordered w-full max-w-md"
           required
         />
-        <button type="submit" className="btn btn-primary w-full md:w-auto">
+        <button
+          type="submit"
+          className="btn btn-accent text-white w-full md:w-auto"
+        >
           Subscribe
         </button>
       </form>
