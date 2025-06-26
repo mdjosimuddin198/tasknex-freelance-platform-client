@@ -7,7 +7,8 @@ import { toast } from "react-toastify";
 const UpdateTask = () => {
   const { logedInuser } = useContext(AuthContext);
   const [deadline, setDeadline] = useState(null);
-  const { _id, budget, description, selsct, taskTitle } = useLoaderData();
+  const { _id, budget, description, selsct, taskTitle, image } =
+    useLoaderData();
   const handleUpdateTask = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -75,6 +76,15 @@ const UpdateTask = () => {
             className="input w-full"
             placeholder="Task Title"
             required
+          />
+          <label className="label">Task Image URL</label>
+          <input
+            type="url"
+            name="image"
+            className="input w-full"
+            placeholder="Task Image Url"
+            required
+            defaultValue={image}
           />
 
           <select

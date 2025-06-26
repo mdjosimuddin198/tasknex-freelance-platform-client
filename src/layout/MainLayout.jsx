@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 const MainLayout = () => {
   return (
     <>
-      <header className="w-11/12 mx-auto">
+      <header className=" sticky shadow-sm top-0 z-50 bg-accent rounded-2xl">
         <NavBar></NavBar>
       </header>
       <main className="w-11/12 mx-auto">

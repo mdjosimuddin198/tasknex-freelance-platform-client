@@ -34,6 +34,10 @@ const NavBar = () => {
       <NavLink className="ml-5 p-2 rounded-xl text-xl" to="/browse_tasks">
         Browse Tasks
       </NavLink>
+
+      <NavLink className="ml-5 p-2 rounded-xl text-xl" to="/about_us">
+        About US
+      </NavLink>
       <NavLink className="ml-5 p-2 rounded-xl  text-xl" to="/my_posted_tasks">
         My Posted Tasks
       </NavLink>
@@ -47,7 +51,7 @@ const NavBar = () => {
   );
   return (
     <>
-      <div className="navbar rounded-2xl bg-base-100 shadow-sm">
+      <div className="navbar my-4 rounded-2xl w-11/12 mx-auto ">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className=" mx-2 lg:hidden">

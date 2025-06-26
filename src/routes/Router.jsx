@@ -12,6 +12,7 @@ import Loading from "../components/Loading";
 import JobDetails from "../components/JobDetails";
 import UpdateTask from "../components/UpdateTask";
 import ErrorPage from "../page/ErrorPage";
+import AboutUs from "../page/AboutUs";
 
 const Router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const Router = createBrowserRouter([
         },
         Component: BrowseTasks,
         hydrateFallbackElement: <Loading></Loading>,
+      },
+      {
+        path: "about_us",
+        Component: AboutUs,
       },
       {
         path: "/my_posted_tasks",
