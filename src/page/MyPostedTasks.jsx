@@ -28,12 +28,15 @@ const MyPostedTasks = () => {
 
   useEffect(() => {
     const fetchPostCount = async () => {
-      fetch("https://task-nex-server.vercel.app/bids")
-        .then((res) => res.json())
-        .then((data) => {
-          // console.log(data);
-          setBids(data);
-        });
+      fetch("https://task-nex-server.vercel.app/bids"),
+        {
+          credentials: "include",
+        }
+          .then((res) => res.json())
+          .then((data) => {
+            // console.log(data);
+            setBids(data);
+          });
     };
 
     fetchPostCount();
@@ -54,6 +57,7 @@ const MyPostedTasks = () => {
       if (result.isConfirmed) {
         fetch(`https://task-nex-server.vercel.app/alltasks/${id}`, {
           method: "DELETE",
+          credentials: "include",
         })
           .then((res) => res.json())
           .then((data) => {
@@ -166,13 +170,15 @@ const MyPostedTasks = () => {
         <div className="modal-box bg-white">
           {allBids.map((bid) => (
             <div key={bid._id} className="bg-white p-4 rounded-lg shadow mb-3">
-              <h3 className="font-bold">Bid ID: {bid._id}</h3>
-              <p>Bids Received: {bid.count || "0"}</p>
+              <h3 className="font-bold">User ID: {bid._id}</h3>
+              <p>Total Users Who Joined This Event {bid.count || "0"}</p>
             </div>
           ))}
 
           {allBids.length === 0 && (
-            <p className="text-accent">No bids available yet</p>
+            <p className="text-accent">
+              there were no participants in this event
+            </p>
           )}
           <div className="modal-action">
             <form method="dialog">

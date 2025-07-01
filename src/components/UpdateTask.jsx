@@ -23,6 +23,7 @@ const UpdateTask = () => {
 
     fetch(`https://task-nex-server.vercel.app/alltasks/${_id}`, {
       method: "PUT",
+      credentials: "include",
       headers: {
         "content-type": "application/json",
       },

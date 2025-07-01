@@ -28,7 +28,10 @@ const Login = () => {
       })
       .catch((error) => {
         console.log(error);
-        toast.error("error found");
+        toast.error(
+          error.message ||
+            "Login failed! Please check your email and password and try again."
+        );
       });
   };
 

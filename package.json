@@ -12,7 +12,10 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@tailwindcss/vite": "^4.1.7",
+    "axios": "^1.10.0",
+    "axois": "^0.0.1-security",
     "date-fns": "^4.1.0",
+    "dayjs": "^1.11.13",
     "firebase": "^11.7.3",
     "lottie-react": "^2.4.1",
     "react": "^19.1.0",

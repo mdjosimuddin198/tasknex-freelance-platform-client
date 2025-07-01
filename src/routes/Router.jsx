@@ -92,7 +92,10 @@ const Router = createBrowserRouter([
         path: "/post/details/:id",
         loader: async ({ params }) => {
           const res = await fetch(
-            `https://task-nex-server.vercel.app/alltasks/${params.id}`
+            `https://task-nex-server.vercel.app/alltasks/${params.id}`,
+            {
+              credentials: "include",
+            }
           );
           const data = await res.json();
           return data;
@@ -109,7 +112,10 @@ const Router = createBrowserRouter([
         path: "/update_task/:id",
         loader: async ({ params }) => {
           const res = await fetch(
-            `https://task-nex-server.vercel.app/alltasks/${params.id}`
+            `https://task-nex-server.vercel.app/alltasks/${params.id}`,
+            {
+              credentials: "include",
+            }
           );
           const data = await res.json();
           return data;

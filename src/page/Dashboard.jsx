@@ -52,14 +52,14 @@ const Dashboard = () => {
             to="/dashboard/my_posted_tasks"
             className="hover:bg-white hover:text-primary p-2 rounded cursor-pointer flex items-center gap-2"
           >
-            <MdAssignment /> My Tasks
+            <MdAssignment /> My Event
           </NavLink>
           <NavLink
             onClick={toggleSidebar}
             to="/dashboard/add_task"
             className="hover:bg-white hover:text-primary p-2 rounded cursor-pointer flex items-center gap-2"
           >
-            <MdGavel /> Add Task
+            <MdGavel /> Add Event
           </NavLink>
           <NavLink
             to="/dashboard/setting"

@@ -1,34 +1,54 @@
-import React, { useEffect, useState } from "react";
-import { FaCheckCircle } from "react-icons/fa";
+import React, { useContext, useEffect, useState } from "react";
+import { FaCheckCircle, FaTasks } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
 import { IoIosSend, IoMdArrowRoundBack } from "react-icons/io";
 import { Link, useLoaderData } from "react-router";
+import { AuthContext } from "../context/AuthProvider";
+import { toast } from "react-toastify";
+import { MdAssignmentTurnedIn } from "react-icons/md";
 
 const JobDetails = () => {
+  const { logedInuser } = useContext(AuthContext);
   const job = useLoaderData();
   const [bidsCount, setBidsCount] = useState(0);
 
   console.log(job._id);
   useEffect(() => {
-    fetch(`https://task-nex-server.vercel.app/bids/${job._id}`)
+    fetch(`https://task-nex-server.vercel.app/bids/${job._id}`, {
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then((data) => setBidsCount(data.count));
   }, [job._id]);
 
   const handleBidClick = () => {
-    fetch(`https://task-nex-server.vercel.app/bids/${job._id}`, {
-      method: "POST",
-    })
-      .then((res) => res.json())
-      .then((data) => setBidsCount((prev) => prev + 1));
+    fetch(
+      `https://task-nex-server.vercel.app/bids/${job._id}/${logedInuser.id}`,
+      {
+        method: "POST",
+        credentials: "include",
+      }
+    )
+      .then((res) => {
+        if (res.status === 400) {
+          toast.error("You have already join  on this event.");
+          return;
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (data) {
+          setBidsCount((prev) => prev + 1);
+          toast.success("join successful this event");
+        }
+      });
   };
 
   return (
     <div className="bg-white shadow rounded-xl my-4  w-full mx-auto py-4  px-6">
       <h2 className="text-xl mb-2 text-center">
-        You bid for{" "}
-        <span className="text-accent font-semibold">{bidsCount}</span>{" "}
-        opportunities.
+        Total Users Who Joined This Event
+        <span className="text-accent font-semibold"> {bidsCount} </span>{" "}
       </h2>
       <div className="">
         <img
@@ -56,7 +76,7 @@ const JobDetails = () => {
         </div>
 
         <div className="text-right">
-          <p className="text-2xl font-bold">${job.budget}</p>
+          <p className=" text-sm md:text-2xl font-bold">${job.budget}</p>
           <p className="text-sm text-gray-600 mt-1">(Fixed)</p>
         </div>
       </div>
@@ -72,9 +92,10 @@ const JobDetails = () => {
         <div className="flex flex-col md:flex-row items-center gap-2">
           <button
             onClick={handleBidClick}
-            className="text-gray-400 text-xl hover:text-gray-600"
+            className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded"
           >
-            <FaRegHeart />
+            {/* <FaRegHeart /> */}
+            <MdAssignmentTurnedIn></MdAssignmentTurnedIn>
           </button>
 
           <button className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded">

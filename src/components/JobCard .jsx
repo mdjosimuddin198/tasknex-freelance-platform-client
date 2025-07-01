@@ -37,22 +37,13 @@ const JobCard = ({ job }) => {
         {showFull ? job.description : `${job.description.slice(0, 100)}...`}
       </p>
 
-      <div className="border-t mt-4 pt-4 flex justify-between items-center text-sm text-gray-600">
+      <div className="border-t mt-4 pt-4 text-sm text-gray-600 flex flex-col md:flex-row justify-between items-center gap-2">
         <p>
           <span className="font-semibold">Expiry:</span>{" "}
           {new Date(job.deadline).toLocaleDateString()}
         </p>
 
-        <div className="flex items-center gap-2">
-          {/* <button className="text-gray-400 text-xl hover:text-gray-600">
-            <FaRegHeart />
-          </button> */}
-          {/* <button
-            onClick={() => setShowFull(!showFull)}
-            className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded"
-          >
-            See Details
-          </button> */}
+        <div>
           <Link
             to={`/post/details/${job._id}`}
             className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded"

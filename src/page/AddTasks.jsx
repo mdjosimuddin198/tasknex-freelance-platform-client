@@ -23,6 +23,7 @@ const AddTasks = () => {
 
     fetch("https://task-nex-server.vercel.app/alltasks", {
       method: "POSt",
+      credentials: "include",
       headers: {
         "content-type": "application/json",
       },
