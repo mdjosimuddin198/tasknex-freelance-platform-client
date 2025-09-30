@@ -1,30 +1,54 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import Slider from "./Slider";
-import { useLoaderData } from "react-router";
-import TaskCard from "./TaskCard";
-import { AuthContext } from "../context/AuthProvider";
 import WhyChooseUs from "./WhyChooseUs";
 import ReviewSection from "./ReviewSection";
 import Newsletter from "./Newsletter";
 import BlogSection from "./BlogSection";
+import BrowseTasks from "../page/BrowseTasks";
 
-const titles = [
-  { id: 1, image: "https://i.ibb.co/pjYZhspH/image.png" },
-  { id: 2, image: "https://i.ibb.co/chpmL5Q0/image.png" },
-  { id: 3, image: "https://i.ibb.co/5W8TKcXt/image.png" },
-  { id: 4, image: "https://i.ibb.co/FjwdWXS/image.png" },
+const slides = [
+  {
+    id: 1,
+    title:
+      "Empowering the Next Generation of Freelancers and Clients to Achieve More",
+    description:
+      "TaskNex connects talented freelancers with real clients, enabling smarter, faster, and reliable project completion across the globe.",
+    image:
+      "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1470&q=80",
+  },
+  {
+    id: 2,
+    title: "Transforming the Way Businesses Hire Freelance Talent Worldwide",
+    description:
+      "Discover top professionals, streamline your workflow, and grow your business efficiently with TaskNex’s trusted platform.",
+    image:
+      "https://i.pinimg.com/736x/a9/0c/95/a90c959d81b6def4b1571bf775a1d199.jpg",
+  },
+  {
+    id: 3,
+    title:
+      "Unlocking Opportunities for Skilled Freelancers to Showcase Their Expertise",
+    description:
+      "TaskNex empowers freelancers to sell their skills online and connect with clients who value quality work and innovation.",
+    image:
+      "https://i.pinimg.com/736x/b3/a6/89/b3a6898b5efacf63d28e6235372970af.jpg",
+  },
+  {
+    id: 4,
+    title:
+      "Connecting Clients and Freelancers with Fast, Secure, and Smart Solutions",
+    description:
+      "Find the right talent near you or anywhere in the world, manage projects seamlessly, and achieve your goals with TaskNex.",
+    image:
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1470&q=80",
+  },
 ];
 
 const Hero = () => {
-  const { logedInuser } = useContext(AuthContext);
-  const allTasks = useLoaderData();
-  const tasks = allTasks.filter((task) => task.email !== logedInuser?.email);
-  // console.log(allTasks);
-  // console.log("filter task is", tasks);
   return (
     <>
       <Swiper
@@ -32,30 +56,23 @@ const Hero = () => {
         pagination={{
           clickable: true,
         }}
-        modules={[Pagination]}
+        modules={[Pagination, Autoplay]}
+        loop={true}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
         className="mySwiper"
       >
-        {titles.map((title) => (
-          <SwiperSlide key={title.id}>
-            <Slider title={title}></Slider>
+        {slides.map((slide) => (
+          <SwiperSlide key={slide.id}>
+            <Slider slide={slide}></Slider>
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="my-2 text-center">
-        <h3 className="text-5xl font-bold">Our Lates Jobs</h3>
-        <p className="text-xl text-base-200">
-          Explore the most viewd jobs for today
-        </p>
-      </div>
-      <div className="grid grid-cols-1 my-6 md:grid-cols-2 lg:grid-cols-3 gap-3">
-        {tasks.map((job) => (
-          <TaskCard key={job._id} job={job}></TaskCard>
-        ))}
-      </div>
-      <WhyChooseUs></WhyChooseUs>
-      <ReviewSection></ReviewSection>
-      <BlogSection></BlogSection>
-      <Newsletter></Newsletter>
+      {/* lanading page  */}
+      <BrowseTasks />
+      <WhyChooseUs />
+      <ReviewSection />
+      <BlogSection />
+      <Newsletter />
     </>
   );
 };
