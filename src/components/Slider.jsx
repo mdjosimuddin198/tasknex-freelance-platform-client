@@ -2,37 +2,33 @@ import React, { useContext } from "react";
 import { Link } from "react-router";
 import { AuthContext } from "../context/AuthProvider";
 
-const Slider = ({ title }) => {
+const Slider = ({ slide }) => {
   const { logedInuser } = useContext(AuthContext);
   return (
-    <>
-      <div className="flex flex-col md:flex-row justify-between   items-center py-4 my-2">
-        <div className="md:w-[45%] w-full   text-4xl ml-4 text-primary font-bold  space-y-3">
-          <h3>Empowering the Next </h3>
-          <h2> Generation of Freelancers</h2>
-          <h2> and Clients</h2>
-          <p className="text-xl font-thin text-base-200">
-            TaskNex is the next-generation freelance marketplace designed to
-            connect talented freelancers with real clients, faster and smarter
-            than ever before.
-          </p>
-          <div className="space-x-3">
-            <button className="btn bg-accent btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">
-              {logedInuser ? "Wellcome Back" : "Join Now"}
-            </button>
-            <Link
-              to="/browse_tasks"
-              className="btn bg-accent btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl"
-            >
-              Find Job
-            </Link>
-          </div>
-        </div>
-        <div className="md:w-[45%] w-full">
-          <img className="w-[450px] h-[350px]" src={title.image} alt="" />
+    <div
+      className="relative flex flex-col justify-center items-center h-[400px] md:h-[450px] bg-cover bg-center bg-no-repeat rounded-2xl text-center text-white px-4"
+      style={{ backgroundImage: `url(${slide.image})` }}
+    >
+      {/* Overlay for readability */}
+      <div className="absolute inset-0 bg-black/40 rounded-2xl"></div>
+
+      {/* Text Content */}
+      <div className="relative space-y-4 max-w-2xl">
+        <h2 className="text-3xl md:text-5xl  font-semibold">{slide.title}</h2>
+        <p className="text-lg md:text-2xl font-light">{slide.description}</p>
+        <div className="space-x-4 mt-4">
+          <button className="btn bg-primary text-white btn-sm md:btn-md lg:btn-lg">
+            Post New Job
+          </button>
+          <Link
+            to="/find-job"
+            className="btn bg-secondary text-white btn-sm md:btn-md lg:btn-lg"
+          >
+            Find Job
+          </Link>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
