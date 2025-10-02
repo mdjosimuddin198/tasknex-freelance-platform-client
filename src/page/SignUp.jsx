@@ -1,11 +1,11 @@
 import React, { use, useContext, useState } from "react";
 import { Link, useNavigate } from "react-router";
-
-import { FiEyeOff } from "react-icons/fi";
+import { FaUser, FaImage, FaEnvelope, FaLock } from "react-icons/fa";
 import { BsEye } from "react-icons/bs";
+import { FiEyeOff } from "react-icons/fi";
+import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../context/AuthProvider";
 import { toast } from "react-toastify";
-import { FcGoogle } from "react-icons/fc";
 
 // import { Helmet } from "react-helmet";
 
@@ -85,80 +85,103 @@ const SignUp = () => {
   };
   return (
     <>
-      {/* <Helmet>
-        <title>Resister now|GreenBox BD</title>
-      </Helmet> */}
-
-      <div className="card bg-base-100 mx-auto my-5 w-full max-w-sm shrink-0 shadow-2xl">
+      <div className="card bg-white mx-auto my-10 w-full max-w-sm shadow-2xl rounded-2xl">
         <div className="card-body">
-          <form onSubmit={handleRegister} className="fieldset">
-            {/* name  */}
-            <label className="label text-xl">Name</label>
-            <input
-              type="text"
-              name="name"
-              className="input"
-              placeholder="Name"
-              required
-            />
-            {/* photourl  */}
-            <label className="label text-xl">PhotoURL</label>
-            <input
-              type="text"
-              name="photo"
-              className="input"
-              placeholder="PhotoURL"
-              required
-            />
-            {/* email */}
-            <label className="label text-xl">Email</label>
-            <input
-              type="email"
-              name="email"
-              className="input"
-              placeholder="Email"
-              required
-            />
-            {/* password  */}
-            <div className="relative">
-              <label className="label mt-4">Password</label>
-              <input
-                type={showPass ? "text" : "password"}
-                name="password"
-                className="input "
-                placeholder="Password"
-                required
-              />
-              <button
-                type="button"
-                onClick={handleshowPassword}
-                className="btn absolute right-4"
-              >
-                {showPass ? <FiEyeOff></FiEyeOff> : <BsEye></BsEye>}
-              </button>
-            </div>
-            {/* end  */}
+          <h2 className="text-center text-2xl font-bold mb-4">
+            Create Account ✨
+          </h2>
 
-            <button className="btn btn-neutral mt-4">Register Now</button>
-            <p className="text-sm text-base-200">
-              Allready have account{" "}
-              <Link className="text-blue-400 underline" to="/auth/login">
-                {"   "}
-                Login Now{" "}
+          <form onSubmit={handleRegister} className="space-y-3">
+            {/* Name */}
+            <div>
+              <label className="flex items-center gap-2 border rounded-lg px-3 py-2">
+                <FaUser className="text-gray-500" />
+                <input
+                  type="text"
+                  name="name"
+                  className="w-full focus:outline-none"
+                  placeholder="Enter your name"
+                  required
+                />
+              </label>
+            </div>
+
+            {/* PhotoURL */}
+            <div>
+              <label className="flex items-center gap-2 border rounded-lg px-3 py-2">
+                <FaImage className="text-gray-500" />
+                <input
+                  type="text"
+                  name="photo"
+                  className="w-full focus:outline-none"
+                  placeholder="Enter photo URL"
+                  required
+                />
+              </label>
+            </div>
+
+            {/* Email */}
+            <div>
+              <label className="flex items-center gap-2 border rounded-lg px-3 py-2">
+                <FaEnvelope className="text-gray-500" />
+                <input
+                  type="email"
+                  name="email"
+                  className="w-full focus:outline-none"
+                  placeholder="Enter your email"
+                  required
+                />
+              </label>
+            </div>
+
+            {/* Password */}
+            <div>
+              <label className="flex items-center gap-2 border rounded-lg px-3 py-2">
+                <FaLock className="text-gray-500" />
+                <input
+                  type={showPass ? "text" : "password"}
+                  name="password"
+                  className="w-full focus:outline-none"
+                  placeholder="Enter your password"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={handleshowPassword}
+                  className="cursor-pointer text-gray-500"
+                >
+                  {showPass ? <FiEyeOff /> : <BsEye />}
+                </button>
+              </label>
+            </div>
+
+            {/* Register Button */}
+            <button className="btn bg-teal-600 hover:bg-teal-700 text-white w-full rounded-lg">
+              Register Now
+            </button>
+
+            {/* Already Account */}
+            <p className="text-center text-gray-600 text-sm">
+              Already have account?{" "}
+              <Link className="text-teal-600 font-medium" to="/auth/login">
+                Login Now
               </Link>
             </p>
+
+            {/* Error & Success */}
             {errorMsg && <p className="text-red-400">{errorMsg}</p>}
             {successMsg && (
-              <p className="text-green-500">Account have Create SuccessFully</p>
+              <p className="text-green-500">Account created successfully ✅</p>
             )}
           </form>
-          {/* Login with google  */}
+
+          {/* Google Login */}
           <button
             onClick={handleGoogoleLogin}
-            className="btn bg-white text-black border-[#e5e5e5]"
+            className="btn bg-gray-800 text-white w-full mt-3 flex items-center gap-2 justify-center"
           >
-            <FcGoogle></FcGoogle>
-            Login with Google
+            <FcGoogle className="text-xl" />
+            Google
           </button>
         </div>
       </div>

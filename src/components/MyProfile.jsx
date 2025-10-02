@@ -62,7 +62,7 @@ const MyProfile = () => {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-400"
+                className="w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-primary"
                 placeholder="Enter new name"
               />
             </div>
@@ -74,20 +74,20 @@ const MyProfile = () => {
                 type="text"
                 value={photoURL}
                 onChange={(e) => setPhotoURL(e.target.value)}
-                className="w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-400"
+                className="w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-primary"
                 placeholder="Enter new photo URL"
               />
             </div>
             <button
               type="submit"
-              className="w-full bg-accent text-white py-2 rounded-lg hover:skew-1 transition"
+              className="w-full bg-primary text-white py-2 rounded-lg hover:skew-1 transition"
             >
               Save Changes
             </button>
           </form>
 
           {message && (
-            <p className="mt-4 text-center text-green-600 font-medium">
+            <p className="mt-4 text-center text-primary font-medium">
               {message}
             </p>
           )}

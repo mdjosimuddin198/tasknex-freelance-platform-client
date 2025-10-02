@@ -1,85 +1,107 @@
 import React, { useContext, useState } from "react";
 import { CiHome } from "react-icons/ci";
 import { FiMenu } from "react-icons/fi";
-import {
-  MdDashboard,
-  MdAssignment,
-  MdGavel,
-  MdSettings,
-  MdLogout,
-} from "react-icons/md";
-import { NavLink, Outlet, useLoaderData } from "react-router";
+import { MdAssignment, MdGavel, MdSettings, MdLogout } from "react-icons/md";
+import { Link, NavLink, Outlet } from "react-router";
 import { AuthContext } from "../context/AuthProvider";
+import { FaUser } from "react-icons/fa6";
+import { toast } from "react-toastify";
 
 const Dashboard = () => {
-  const data = useLoaderData();
-  const { logedInuser, setLogedInUser, logOutUser } = useContext(AuthContext);
+  const { setLogedInUser, logOutUser } = useContext(AuthContext);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const handleLogOutUser = () => {
-    logOutUser()
-      .then(() => {
-        // console.log("user log out successfully");
-        setLogedInUser(null);
-        toast.success("Log Out Successfully");
-      })
-      .catch((error) => {
-        console.log(error);
-        toast.error("error found");
+
+  const handleLogOutUser = async () => {
+    try {
+      await logOutUser();
+      await fetch("http://localhost:5000/api/logout", {
+        method: "POST",
+        credentials: "include",
       });
+
+      setLogedInUser(null);
+      toast.success("Log Out Successfully");
+    } catch (error) {
+      console.error(error);
+      toast.error("error found.");
+    }
   };
+
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
-  const myPost = data?.filter((task) => task.email === logedInuser?.email);
 
   return (
     <div className="flex min-h-screen bg-gray-100">
+      {/* Sidebar */}
       <aside
-        className={`sticky top-0 h-screen md:w-64 w-full bg-accent text-black p-6 space-y-4 md:block ${
-          sidebarOpen ? "block" : "hidden"
-        } transition-transform duration-300 z-50`}
+        className={`fixed md:sticky top-0 left-0 h-full md:h-screen md: w-64 bg-secondary text-white  p-6 space-y-4 z-50 transform transition-transform duration-300 
+          ${
+            sidebarOpen ? "translate-x-0" : "-translate-x-full"
+          } md:translate-x-0`}
       >
-        <h2 className="text-2xl font-bold mb-8">TaskNex</h2>
+        <Link to="/" className="text-2xl font-bold mb-8">
+          TaskNex{" "}
+        </Link>
+
         <ul className="space-y-4">
           <NavLink
-            to="/"
-            className="hover:bg-white hover:text-primary p-2 rounded cursor-pointer flex items-center gap-2"
+            to="/dashboard"
+            onClick={() => setSidebarOpen(false)}
+            className="hover:bg-gray-100 hover:text-primary p-2 rounded cursor-pointer flex items-center gap-2"
           >
             <CiHome /> Home
           </NavLink>
           <NavLink
-            onClick={toggleSidebar}
             to="/dashboard/my_posted_tasks"
-            className="hover:bg-white hover:text-primary p-2 rounded cursor-pointer flex items-center gap-2"
+            onClick={() => setSidebarOpen(false)}
+            className="hover:bg-gray-100 hover:text-primary p-2 rounded cursor-pointer flex items-center gap-2"
           >
-            <MdAssignment /> My Event
+            <MdAssignment /> My Posted Job
           </NavLink>
           <NavLink
-            onClick={toggleSidebar}
-            to="/dashboard/add_task"
-            className="hover:bg-white hover:text-primary p-2 rounded cursor-pointer flex items-center gap-2"
+            to="/dashboard/add_job"
+            onClick={() => setSidebarOpen(false)}
+            className="hover:bg-gray-100 hover:text-primary p-2 rounded cursor-pointer flex items-center gap-2"
           >
-            <MdGavel /> Add Event
+            <MdGavel /> Add New Job
           </NavLink>
           <NavLink
             to="/dashboard/setting"
-            className="hover:bg-white hover:text-primary p-2 rounded cursor-pointer flex items-center gap-2"
+            onClick={() => setSidebarOpen(false)}
+            className="hover:bg-gray-100 hover:text-primary p-2 rounded cursor-pointer flex items-center gap-2"
           >
             <MdSettings /> Settings
           </NavLink>
+          <NavLink
+            to="/dashboard/profile"
+            onClick={() => setSidebarOpen(false)}
+            className="hover:bg-gray-100 hover:text-primary p-2 rounded cursor-pointer flex items-center gap-2"
+          >
+            <FaUser /> Profile
+          </NavLink>
+
           <button
             onClick={handleLogOutUser}
-            className="hover:bg-white hover:text-primary p-2 rounded cursor-pointer flex items-center gap-2"
+            className="hover:bg-gray-100 hover:text-primary p-2 rounded cursor-pointer flex items-center gap-2"
           >
             <MdLogout /> Logout
           </button>
         </ul>
       </aside>
 
+      {/* Overlay for mobile */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0  bg-opacity-40 z-40 md:hidden"
+          onClick={toggleSidebar}
+        />
+      )}
+
       {/* Main Content */}
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col ">
         {/* Top Navbar */}
-        <div className="flex items-center justify-between p-4 bg-white shadow-md">
+        <div className="flex sticky z-20 top-0 left-0  items-center justify-between p-4 bg-white shadow-md">
           <button className="md:hidden" onClick={toggleSidebar}>
             <FiMenu className="text-2xl" />
           </button>
@@ -94,27 +116,7 @@ const Dashboard = () => {
           </button>
         </div>
 
-        {/* Dashboard Content */}
-        <div className="p-6 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {/* Card 1 */}
-          <div className="card bg-base-100 shadow hover:scale-105 transition-transform p-6 rounded-xl">
-            <h2 className="text-xl font-bold mb-2">Total Tasks</h2>
-            <p className="text-4xl font-bold text-primary">{data.length}</p>
-          </div>
-
-          {/* Card 2 */}
-          <div className="card bg-base-100 shadow hover:scale-105 transition-transform p-6 rounded-xl">
-            <h2 className="text-xl font-bold mb-2">My Posted Task</h2>
-            <p className="text-4xl font-bold text-secondary">{myPost.length}</p>
-          </div>
-
-          {/* Card 3 */}
-          <div className="card bg-base-100 shadow hover:scale-105 transition-transform p-6 rounded-xl">
-            <h2 className="text-xl font-bold mb-2">Completed</h2>
-            <p className="text-4xl font-bold text-accent">Coming Soon</p>
-          </div>
-        </div>
-        <div className="flex-1 overflow-x-auto p-6">
+        <div className="overflow-x-auto p-6">
           <Outlet></Outlet>
         </div>
       </div>

@@ -28,19 +28,21 @@ const MyPostedTasks = () => {
 
   useEffect(() => {
     const fetchPostCount = async () => {
-      fetch("https://task-nex-server.vercel.app/bids"),
-        {
+      try {
+        const res = await fetch("http://localhost:5000/bids", {
           credentials: "include",
-        }
-          .then((res) => res.json())
-          .then((data) => {
-            // console.log(data);
-            setBids(data);
-          });
+        });
+        const data = await res.json();
+        setBids(data);
+      } catch (err) {
+        console.error(err);
+      }
     };
 
-    fetchPostCount();
-  }, [logedInuser._id]); //
+    if (logedInuser?._id) {
+      fetchPostCount();
+    }
+  }, [logedInuser?._id]);
 
   const handleDeleteUser = (id) => {
     // console.log(id);
@@ -55,7 +57,7 @@ const MyPostedTasks = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://task-nex-server.vercel.app/alltasks/${id}`, {
+        fetch(`http://localhost:5000/job/${id}`, {
           method: "DELETE",
           credentials: "include",
         })
@@ -91,7 +93,7 @@ const MyPostedTasks = () => {
             Start by sharing your first post with the community.
           </p>
           <Link
-            to={"/dashboard/add_task"}
+            to={"/dashboard/add_job"}
             className="px-4 py-2 bg-accent text-white rounded-lg transition"
           >
             Create A Post
@@ -124,19 +126,19 @@ const MyPostedTasks = () => {
                         <div className="avatar">
                           <div className="mask mask-squircle h-12 w-12">
                             <img
-                              src={post.image}
+                              src={post.companyLogo}
                               alt="Avatar Tailwind CSS Component"
                             />
                           </div>
                         </div>
                         <div>
-                          <div className="font-bold">{post.taskTitle}</div>
+                          <div className="font-bold">{post.title}</div>
                           <div className="text-sm opacity-50">{post.email}</div>
                         </div>
                       </div>
                     </td>
-                    <td>${post.budget}</td>
-                    <td>{post.selsct}</td>
+                    <td>${post.salary}</td>
+                    <td>{post.category.name}</td>
                     <th className="space-x-1.5 space-y-1.5">
                       <button
                         onClick={() => handelBits(post._id)}
@@ -146,7 +148,7 @@ const MyPostedTasks = () => {
                         <FaRegHeart />
                       </button>
                       <Link
-                        to={`/update_task/${post._id}`}
+                        to={`/dashboard/update_task/${post._id}`}
                         className="btn btn-accent text-white text-[15px]"
                       >
                         {" "}

@@ -1,5 +1,4 @@
 import React, { Children, createContext, useEffect, useState } from "react";
-import { app } from "../components/firebase/firebase.config";
 
 import {
   createUserWithEmailAndPassword,
@@ -12,6 +11,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import axios from "axios";
+import { app } from "../firebase/firebase.config";
 export const AuthContext = createContext();
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
@@ -36,11 +36,12 @@ const AuthProvider = ({ children }) => {
         const info = { userEmail: user.email };
 
         axios
-          .post("https://task-nex-server.vercel.app/jwt_token", info, {
+          .post("http://localhost:5000/jwt_token", info, {
             withCredentials: true,
           })
           .then((res) => {
-            console.log("after jwt token ", res.data);
+            // console.log("after jwt token ", res.data);
+            console.log(res.data);
           })
           .catch((err) => console.log(err));
       }

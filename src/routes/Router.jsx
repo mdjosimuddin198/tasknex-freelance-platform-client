@@ -4,7 +4,6 @@ import MainLayout from "../layout/MainLayout";
 import Hero from "../components/Hero";
 import BrowseTasks from "../page/BrowseTasks";
 import MyPostedTasks from "../page/MyPostedTasks";
-import AddTasks from "../page/AddTasks";
 import SignUp from "../page/SignUp";
 import Login from "../components/Login";
 import PrivetRoute from "../components/PrivetRoute";
@@ -16,6 +15,8 @@ import AboutUs from "../page/AboutUs";
 import ContactPage from "../page/ContactPage";
 import MyProfile from "../components/MyProfile";
 import Dashboard from "../page/Dashboard";
+import DashboardOverview from "../components/DashboardOverview";
+import AddJob from "../page/AddJob";
 
 const Router = createBrowserRouter([
   {
@@ -26,29 +27,18 @@ const Router = createBrowserRouter([
       {
         index: true,
         loader: async () => {
-          const res = await fetch(
-            "https://task-nex-server.vercel.app/alltasks?limit=6"
-          );
+          const res = await fetch("http://localhost:5000/job?limit=6");
           const data = await res.json();
           return data;
         },
         Component: Hero,
         hydrateFallbackElement: <Loading></Loading>,
       },
-      // {
-      //   path: "/add_task",
-      //   element: (
-      //     <PrivetRoute>
-      //       <AddTasks></AddTasks>
-      //     </PrivetRoute>
-      //   ),
-      // },
+
       {
-        path: "/browse_tasks",
+        path: "/find-job",
         loader: async () => {
-          const res = await fetch(
-            "https://task-nex-server.vercel.app/alltasks"
-          );
+          const res = await fetch("http://localhost:5000/job");
           const data = await res.json();
           return data;
         },
@@ -64,39 +54,11 @@ const Router = createBrowserRouter([
         Component: ContactPage,
       },
       {
-        path: "profile",
-        element: (
-          <PrivetRoute>
-            <MyProfile></MyProfile>
-          </PrivetRoute>
-        ),
-      },
-      // {
-      //   path: "/my_posted_tasks",
-      //   loader: async () => {
-      //     const res = await fetch(
-      //       "https://task-nex-server.vercel.app/alltasks"
-      //     );
-      //     const data = await res.json();
-
-      //     return data;
-      //   },
-      //   element: (
-      //     <PrivetRoute>
-      //       <MyPostedTasks></MyPostedTasks>
-      //     </PrivetRoute>
-      //   ),
-      //   hydrateFallbackElement: <Loading></Loading>,
-      // },
-      {
-        path: "/post/details/:id",
+        path: "/job-details/:id",
         loader: async ({ params }) => {
-          const res = await fetch(
-            `https://task-nex-server.vercel.app/alltasks/${params.id}`,
-            {
-              credentials: "include",
-            }
-          );
+          const res = await fetch(`http://localhost:5000/job/${params.id}`, {
+            credentials: "include",
+          });
           const data = await res.json();
           return data;
         },
@@ -108,24 +70,7 @@ const Router = createBrowserRouter([
 
         hydrateFallbackElement: <Loading></Loading>,
       },
-      {
-        path: "/update_task/:id",
-        loader: async ({ params }) => {
-          const res = await fetch(
-            `https://task-nex-server.vercel.app/alltasks/${params.id}`,
-            {
-              credentials: "include",
-            }
-          );
-          const data = await res.json();
-          return data;
-        },
-        element: (
-          <PrivetRoute>
-            <UpdateTask></UpdateTask>
-          </PrivetRoute>
-        ),
-      },
+
       {
         path: "/auth/sign_up",
         Component: SignUp,
@@ -139,7 +84,7 @@ const Router = createBrowserRouter([
   {
     path: "dashboard",
     loader: async () => {
-      const res = await fetch("https://task-nex-server.vercel.app/alltasks");
+      const res = await fetch("http://localhost:5000/job");
       const data = await res.json();
       return data;
     },
@@ -151,13 +96,19 @@ const Router = createBrowserRouter([
     ),
     children: [
       {
+        index: true,
+        loader: async () => {
+          const res = await fetch("http://localhost:5000/job");
+          const data = await res.json();
+          return data;
+        },
+        Component: DashboardOverview,
+      },
+      {
         path: "my_posted_tasks",
         loader: async () => {
-          const res = await fetch(
-            "https://task-nex-server.vercel.app/alltasks"
-          );
+          const res = await fetch("http://localhost:5000/job");
           const data = await res.json();
-
           return data;
         },
         element: (
@@ -168,10 +119,33 @@ const Router = createBrowserRouter([
         hydrateFallbackElement: <Loading></Loading>,
       },
       {
-        path: "add_task",
+        path: "update_task/:id",
+        loader: async ({ params }) => {
+          const res = await fetch(`http://localhost:5000/job/${params.id}`, {
+            credentials: "include",
+          });
+          const data = await res.json();
+          return data;
+        },
         element: (
           <PrivetRoute>
-            <AddTasks></AddTasks>
+            <UpdateTask></UpdateTask>
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "profile",
+        element: (
+          <PrivetRoute>
+            <MyProfile></MyProfile>
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "add_job",
+        element: (
+          <PrivetRoute>
+            <AddJob />
           </PrivetRoute>
         ),
       },

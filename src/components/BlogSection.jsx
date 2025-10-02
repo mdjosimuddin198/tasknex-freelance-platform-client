@@ -32,9 +32,7 @@ const BlogSection = () => {
   return (
     <section className="py-16 px-6 max-w-6xl mx-auto">
       <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold mb-4 text-primary">
-          Latest Blog Posts
-        </h2>
+        <h2 className="text-4xl font-bold mb-4 ">Latest Blog Posts</h2>
         <p className="text-gray-600 text-lg max-w-3xl mx-auto">
           Stay updated with the latest freelancing tips, platform news, and
           productivity hacks.
@@ -43,7 +41,10 @@ const BlogSection = () => {
 
       <div className="grid gap-8 md:grid-cols-3">
         {blogs.map((blog) => (
-          <div key={blog.id} className="card bg-base-100 shadow-xl">
+          <div
+            key={blog.id}
+            className="card hover:shadow-lg transition-transform transform hover:-translate-y-1 p-8 text-left bg-base-100 shadow-xl"
+          >
             <figure>
               <img
                 src={blog.image}
@@ -57,7 +58,7 @@ const BlogSection = () => {
               <div className="card-actions justify-end">
                 <button
                   onClick={handleRead}
-                  className="btn btn-accent text-white btn-sm"
+                  className="btn btn-primary text-white btn-sm"
                 >
                   Read More
                 </button>

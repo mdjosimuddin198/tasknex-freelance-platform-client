@@ -1,20 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
-import { FaCheckCircle, FaTasks } from "react-icons/fa";
-import { FaRegHeart } from "react-icons/fa6";
-import { IoIosSend, IoMdArrowRoundBack } from "react-icons/io";
-import { Link, useLoaderData } from "react-router";
+import { useLoaderData } from "react-router";
 import { AuthContext } from "../context/AuthProvider";
 import { toast } from "react-toastify";
-import { MdAssignmentTurnedIn } from "react-icons/md";
+import { CiBookmark, CiLocationOn, CiStopwatch } from "react-icons/ci";
+import { GiMoneyStack } from "react-icons/gi";
+import { formatDistanceToNow } from "date-fns";
+import JobDescriptionLeft from "./jobDescription/JobDescriptionLeft";
+import JobDescriptionRight from "./jobDescription/JobDescriptionRight";
 
 const JobDetails = () => {
   const { logedInuser } = useContext(AuthContext);
   const job = useLoaderData();
   const [bidsCount, setBidsCount] = useState(0);
-
-  console.log(job._id);
   useEffect(() => {
-    fetch(`https://task-nex-server.vercel.app/bids/${job._id}`, {
+    fetch(`http://localhost:5000/bids/${job._id}`, {
       credentials: "include",
     })
       .then((res) => res.json())
@@ -22,13 +21,10 @@ const JobDetails = () => {
   }, [job._id]);
 
   const handleBidClick = () => {
-    fetch(
-      `https://task-nex-server.vercel.app/bids/${job._id}/${logedInuser.id}`,
-      {
-        method: "POST",
-        credentials: "include",
-      }
-    )
+    fetch(`http://localhost:5000/bids/${job._id}/${logedInuser.uid}`, {
+      method: "POST",
+      credentials: "include",
+    })
       .then((res) => {
         if (res.status === 400) {
           toast.error("You have already join  on this event.");
@@ -44,72 +40,97 @@ const JobDetails = () => {
       });
   };
 
+  const companyEmail = job.email; // কোম্পানির ইমেইল
+  const subject = `Application for ${job.title} Position at ${job.company}`;
+
+  const body = `
+Dear Hiring Manager,
+
+I am writing to apply for the ${job.title} Position at  ${job.company} . I am excited about the opportunity to join your team and contribute to building impactful web applications using modern technologies.
+
+I have hands-on experience with JavaScript, React.js, and Next.js. I am also familiar with backend technologies like Node.js, Express.js, and MongoDB. I have built multiple projects using these technologies, which helped me gain valuable experience working with React.js, RESTful APIs, Express.js, and MongoDB integration.
+
+I want to work with your company because it has a strong reputation in the industry, and my skills align well with your requirements. I am confident that I can contribute to your team while continuing to grow as a developer.
+
+I would welcome the opportunity to discuss how my skills and experiences align with your team's needs. Please find my resume attached for your consideration.
+
+Thank you for your time and consideration. I look forward to hearing from you.
+
+Sincerely,
+[your name]
+[your number]
+[Your Portfolio Link]
+[Your GitHub Link]
+  `;
+
   return (
-    <div className="bg-white shadow rounded-xl my-4  w-full mx-auto py-4  px-6">
-      <h2 className="text-xl mb-2 text-center">
-        Total Users Who Joined This Event
-        <span className="text-accent font-semibold"> {bidsCount} </span>{" "}
-      </h2>
-      <div className="">
-        <img
-          className=" w-full h-[350px] object-cover rounded-lg  "
-          src={job.image}
-          alt=""
-        />
-      </div>
-      <div className="flex justify-between items-start">
-        <div>
-          <div className="text-gray-400 text-sm flex items-center gap-3 font-semibold">
-            <FaCheckCircle className="mt-1" />{" "}
-            <p className="text-xl">{job.name}</p>
-            <h3 className="ml-8 text-center">
-              Send Proposeal to :-
-              <span className=" text-accent"> {job.email}</span>
-            </h3>
+    <>
+      <div className="grid md:flex gap-2 sticky bg-secondary top-20 z-10 items-center justify-between p-6 rounded-xl shadow-sm bg-gradient-to-r from-[#2563eb30] to-[#2563eb40]">
+        {/* Left Side */}
+        <div className="flex  items-center gap-4">
+          {/* Logo */}
+          <img
+            src={job.companyLogo}
+            alt={job.company}
+            className="w-16 h-16 rounded-lg object-cover"
+          />
+
+          {/* Text Info */}
+          <div>
+            <h2 className="text-xl font-semibold text-gray-800">{job.title}</h2>
+            <div className="flex flex-wrap gap-4 mt-1 text-sm text-gray-600">
+              <span className="flex items-center gap-1">{job.company}</span>
+              <span className="flex items-center gap-1">
+                <CiLocationOn /> {job.location}
+              </span>
+              <span className="flex items-center gap-1">
+                <CiStopwatch /> {formatDistanceToNow(new Date(job.createdAt))}
+                ago
+              </span>
+              <span className="flex items-center gap-1">
+                <GiMoneyStack /> ${job.salary}k
+              </span>
+            </div>
+
+            {/* Tags */}
+            <div className="flex  gap-2 mt-2">
+              <span className="px-3 py-1 rounded-full bg-blue-100 text-blue-600 text-xs font-medium">
+                {job.jobType}
+              </span>
+              <span className="px-3 py-1 rounded-full bg-green-100 text-green-600 text-xs font-medium">
+                {job.visibility}
+              </span>
+              <span className="px-3 py-1 rounded-full bg-yellow-100 text-yellow-600 text-xs font-medium">
+                {job.urgency}
+              </span>
+            </div>
           </div>
-          <h2 className="text-xl font-semibold mt-1">{job.taskTitle}</h2>
-          <div className="flex flex-wrap gap-2 mt-4">
-            <span className="bg-yellow-100 text-gray-700 px-3 py-1 rounded-md text-sm">
-              {job.selsct}
-            </span>
-          </div>
         </div>
 
-        <div className="text-right">
-          <p className=" text-sm md:text-2xl font-bold">${job.budget}</p>
-          <p className="text-sm text-gray-600 mt-1">(Fixed)</p>
+        {/* Right Side */}
+        <div
+          className="flex items-center 
+         gap-4"
+        >
+          <a
+            href={`mailto:${companyEmail}?subject=${encodeURIComponent(
+              subject
+            )}&body=${encodeURIComponent(body)}`}
+            className="inline-block bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition"
+          >
+            Apply via Email
+          </a>
+          <button className="p-2 border rounded-lg hover:bg-primary text-white transition">
+            <CiBookmark />
+          </button>
         </div>
       </div>
-
-      <p className="mt-4 text-gray-700">{job.description}</p>
-
-      <div className="border-t mt-4 pt-4 flex justify-between items-center text-sm text-gray-600">
-        <p className="text-xl space-x-3">
-          <span className="font-semibold ">Expiry Date:</span>
-          <span> {new Date(job.deadline).toLocaleDateString()}</span>
-        </p>
-        {/* <p>Project Id : {job._id}</p> */}
-        <div className="flex flex-col md:flex-row items-center gap-2">
-          <button
-            onClick={handleBidClick}
-            className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded"
-          >
-            {/* <FaRegHeart /> */}
-            <MdAssignmentTurnedIn></MdAssignmentTurnedIn>
-          </button>
-
-          <button className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded">
-            <IoIosSend />
-          </button>
-          <Link
-            to={`/browse_tasks`}
-            className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded"
-          >
-            <IoMdArrowRoundBack />
-          </Link>
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <JobDescriptionLeft job={job} />
+        {/* Right Side - Dynamic */}
+        <JobDescriptionRight job={job} />
       </div>
-    </div>
+    </>
   );
 };
 

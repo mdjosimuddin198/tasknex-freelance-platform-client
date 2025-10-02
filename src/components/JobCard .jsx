@@ -1,56 +1,64 @@
-import React, { useState } from "react";
-import { FaCheckCircle } from "react-icons/fa";
-import { FaRegHeart } from "react-icons/fa6";
+import { formatDistanceToNow } from "date-fns";
+import React from "react";
 import { Link } from "react-router";
+import { CiLocationOn, CiStopwatch } from "react-icons/ci";
+import { GiMoneyStack } from "react-icons/gi";
 
 const JobCard = ({ job }) => {
-  const [showFull, setShowFull] = useState(false);
   return (
-    <div className="bg-white shadow rounded-xl p-6 w-full mx-auto  max-w-3xl">
-      <div className="">
+    <div className="border rounded-xl shadow-sm p-5 flex flex-col gap-4 bg-gradient-to-r from-[#2563eb30] to-[#2563eb40]">
+      {/* Company Info */}
+      <div className="flex items-center gap-3">
         <img
-          className="hover:scale-120 transition-all w-full h-[200px] object-cover rounded-lg  "
-          src={job.image}
-          alt=""
+          src={job.companyLogo}
+          alt={job.company}
+          className="w-20 h-20 rounded-lg object-cover"
         />
-      </div>
-      <div className="flex justify-between items-start">
-        <div>
-          <div className="text-gray-400 text-sm flex items-center gap-3 font-semibold">
-            <FaCheckCircle className="mt-1" />{" "}
-            <p className="text-xl">{job.name}</p>
-          </div>
-          <h2 className="text-xl font-semibold mt-1">{job.taskTitle}</h2>
-          <div className="flex flex-wrap gap-2 mt-4">
-            <span className="bg-yellow-100 text-gray-700 px-3 py-1 rounded-md text-sm">
-              {job.selsct}
-            </span>
-          </div>
-        </div>
-        <div className="text-right">
-          <p className="text-2xl font-bold">${job.budget}</p>
-          <p className="text-sm text-gray-600 mt-1">(Fixed)</p>
-        </div>
-      </div>
-
-      <p className="mt-4 text-gray-700">
-        {showFull ? job.description : `${job.description.slice(0, 100)}...`}
-      </p>
-
-      <div className="border-t mt-4 pt-4 text-sm text-gray-600 flex flex-col md:flex-row justify-between items-center gap-2">
-        <p>
-          <span className="font-semibold">Expiry:</span>{" "}
-          {new Date(job.deadline).toLocaleDateString()}
-        </p>
-
         <div>
           <Link
-            to={`/post/details/${job._id}`}
-            className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded"
+            to={`/job-details/${job._id}`}
+            className="text-lg hover:text-primary font-semibold"
           >
-            See Details
+            {job.title}
           </Link>
+
+          <p className="text-sm text-gray-500">{job.company}</p>
         </div>
+      </div>
+
+      {/* Meta Info */}
+      <div className="flex flex-wrap gap-4 text-gray-600 text-sm">
+        <div className="flex items-center gap-1">
+          <span>
+            <CiLocationOn size={22} />
+          </span>{" "}
+          {job.location}
+        </div>
+        <div className="flex items-center gap-1">
+          <span>
+            <CiStopwatch size={22} />
+          </span>{" "}
+          Posted {formatDistanceToNow(new Date(job.createdAt))} ago
+        </div>
+        <div className="flex items-center gap-1">
+          <span>
+            <GiMoneyStack size={22} />
+          </span>{" "}
+          ${job.salary}k
+        </div>
+      </div>
+
+      {/* Tags */}
+      <div className="flex flex-wrap gap-2">
+        <span className="px-3 py-1 text-sm rounded-full bg-blue-100 text-blue-600 font-medium">
+          {job.jobType}
+        </span>
+        <span className="px-3 py-1 text-sm rounded-full bg-green-100 text-green-600 font-medium">
+          {job.visibility}
+        </span>
+        <span className="px-3 py-1 text-sm rounded-full bg-yellow-100 text-yellow-600 font-medium">
+          {job.urgency}
+        </span>
       </div>
     </div>
   );

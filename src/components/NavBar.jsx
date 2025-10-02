@@ -100,22 +100,22 @@ const NavBar = () => {
             </>
           ) : (
             <>
-              <NavLink
-                className={`ml-5 p-2 rounded-xl text-xl ${
-                  logedInuser ? "hidden" : "block"
+              <Link
+                className={`btn bg-primary/20 text-primary  ${
+                  logedInuser ? "hidden" : ""
                 }`}
                 to="/auth/sign_up"
               >
-                {logedInuser ? "" : "SignUp"}
-              </NavLink>
-              <NavLink
-                className={`ml-5 p-2 rounded-xl text-xl ${
-                  logedInuser ? "hidden" : "block"
+                Sign Up
+              </Link>
+              <Link
+                className={`btn btn-outline bg-primary  ${
+                  logedInuser ? "hidden" : ""
                 }`}
                 to="/auth/login"
               >
-                {logedInuser ? "" : "LogIn"}
-              </NavLink>
+                Log In
+              </Link>
             </>
           )}
         </div>

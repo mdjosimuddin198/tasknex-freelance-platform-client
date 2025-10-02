@@ -6,16 +6,17 @@
 @plugin "daisyui/theme" {
   name: "light";
   default: true;
-  --color-primary: #000000;
-  --color-base-100: #70707010;
-  --color-secondary: #d72050;
-  --color-base-200: #777777;
-  --color-base-300: #1a1b22;
-  --color-primary: #000000;
-  --color-accent: #fe696a;
+  --color-primary: #2563eb; /* Main blue - headers, primary buttons */
+  --color-base-100: #f3f4f6; /* Light grey background for sections */
+  --color-secondary: #14b8a6; /* Teal accent - highlights, badges, CTA */
+  --color-base-200: #6b7280; /* Medium grey - secondary text */
+  --color-base-300: #1f2937; /* Dark grey - main text, cards text */
+  --color-accent: #ef4444;
 }
 
 a.active {
-  background: black;
-  color: white;
+  /* background: black;
+  color: white; */
+  color: #2563eb;
+  font: 600;
 }

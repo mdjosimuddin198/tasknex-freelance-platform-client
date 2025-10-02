@@ -5,29 +5,51 @@ import { useLoaderData } from "react-router";
 import { toast } from "react-toastify";
 
 const UpdateTask = () => {
+  const categories = [
+    { name: "Development", icon: "💻" },
+    { name: "Design", icon: "🎨" },
+    { name: "Marketing", icon: "📈" },
+    { name: "Accounting / Finance", icon: "💰" },
+    { name: "Human Resource", icon: "🧑‍💼" },
+    { name: "Automotive Jobs", icon: "🚀" },
+    { name: "Customer Service ", icon: "📞" },
+    { name: "Project Management ", icon: " 🚗" },
+  ];
+
   const { logedInuser } = useContext(AuthContext);
-  const [deadline, setDeadline] = useState(null);
-  const { _id, budget, description, selsct, taskTitle, image } =
-    useLoaderData();
-  const handleUpdateTask = (e) => {
+  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  const {
+    _id,
+    title,
+    description,
+    company,
+    companyLogo,
+    location,
+    category,
+    salary,
+    jobType,
+    visibility,
+    urgency,
+  } = useLoaderData();
+
+  const handleUpdateJob = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const newTask = Object.fromEntries(formData.entries());
-    const formattedDeadline = deadline.toISOString();
-    // console.log(formattedDeadline);
-    const taskInfo = {
+    const updateJob = {
       ...newTask,
-      deadline: formattedDeadline,
+      category: selectedCategory,
     };
+    // console.log(formattedDeadline);
 
-    fetch(`https://task-nex-server.vercel.app/alltasks/${_id}`, {
+    fetch(`http://localhost:5000/job/${_id}`, {
       method: "PUT",
       credentials: "include",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(taskInfo),
+      body: JSON.stringify(updateJob),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -41,106 +63,144 @@ const UpdateTask = () => {
     <div>
       <div>
         <h2 className="text-3xl text-center font-bold py-3">
-          Update Your Task and Get It Done Fast
+          Update Your Job and Get It Done Fast
         </h2>
         <p className="text-xl font-thin text-base-200 text-center">
-          Add a concise title and detailed task description including
+          Add a concise title and detailed Job description including
           requirements, <br /> technologies, and deadlines
         </p>
         <form
-          onSubmit={handleUpdateTask}
-          className="fieldset bg-base-100 border-base-300 rounded-box w-full md:w-xl lg:w-2xl border mx-auto my-4 p-4"
+          onSubmit={handleUpdateJob}
+          className="bg-white border border-gray-200 shadow-lg rounded-xl p-6 grid grid-cols-1 md:grid-cols-2 gap-6"
         >
-          <label className="label">Name</label>
-          <input
-            type="text"
-            name="name"
-            value={logedInuser?.displayName}
-            className="input w-full"
-            placeholder="Name"
-            readOnly
-          />
-          <label className="label">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={logedInuser?.email}
-            className="input w-full"
-            placeholder="Email"
-            readOnly
-          />
-          <label className="label">Task Title</label>
-          <input
-            type="text"
-            name="taskTitle"
-            defaultValue={taskTitle}
-            className="input w-full"
-            placeholder="Task Title"
-            required
-          />
-          <label className="label">Task Image URL</label>
-          <input
-            type="url"
-            name="image"
-            className="input w-full"
-            placeholder="Task Image Url"
-            required
-            defaultValue={image}
-          />
-
-          <select
-            name="selsct"
-            required
-            defaultValue={selsct}
-            className="dropdown-content menu bg-base-100 rounded z-1 w-full mt-2 p-2 shadow-sm"
-          >
-            <option value="Developer">Select One</option>
-            <option value="Developer">Developer</option>
-            <option value="Designer">Designer</option>
-            <option value="Support Agent">Support Agent</option>
-            <option value="Writter">Writter</option>
-            <option value="Video Editor">Video Editor</option>
-            <option value="Content writter">Content writter</option>
-          </select>
-          <label className="label">Description </label>
-          <textarea
-            type="text"
-            name="description"
-            defaultValue={description}
-            className="input w-full"
-            placeholder="Description "
-          />
-          <div className="flex flex-col gap-2">
-            <label htmlFor="deadline" className="font-medium text-gray-700">
-              Deadline
-            </label>
-            <DatePicker
-              id="deadline"
-              selected={deadline}
-              onChange={(date) => setDeadline(date)}
-              minDate={new Date()}
-              placeholderText="Select a deadline"
-              dateFormat="MMMM d, yyyy"
-              className="border p-2 rounded-md w-full"
+          {/* Left Column */}
+          <div>
+            <label className="label font-semibold mt-4">Job Title</label>
+            <input
+              type="text"
+              name="title"
+              className="input input-bordered w-full"
+              placeholder="e.g. Software Engineer (Android)"
               required
+              defaultValue={title}
             />
-            {deadline && (
-              <p className="text-sm text-green-600 mt-1">
-                Selected: {deadline.toDateString()}
-              </p>
-            )}
-          </div>
-          <label className="label">Budget</label>
-          <input
-            type="number"
-            name="budget"
-            defaultValue={budget}
-            className="input w-full"
-            placeholder="Budget"
-            required
-          />
 
-          <button className="btn btn-neutral mt-4">Update Tasks</button>
+            <label className="label font-semibold mt-4">Company</label>
+            <input
+              type="text"
+              name="company"
+              className="input input-bordered w-full"
+              placeholder="e.g. Segment"
+              required
+              defaultValue={company}
+            />
+
+            <label className="label font-semibold mt-4">Company Logo URL</label>
+            <input
+              type="url"
+              name="companyLogo"
+              className="input input-bordered w-full"
+              placeholder="Paste company logo URL"
+              required
+              defaultValue={companyLogo}
+            />
+
+            <label className="label font-semibold mt-4">Location</label>
+            <input
+              type="text"
+              name="location"
+              className="input input-bordered w-full"
+              placeholder="e.g. Dhaka, BD"
+              required
+              defaultValue={location}
+            />
+
+            <label className="label font-semibold mt-4">Category</label>
+            <select
+              name="category"
+              onChange={(e) =>
+                setSelectedCategory(
+                  categories.find((c) => c.name === e.target.value)
+                )
+              }
+              className="select select-bordered w-full"
+              required
+              defaultValue={category.name}
+            >
+              {categories.map((cat) => (
+                <option key={cat.name} value={cat.name}>
+                  {cat.icon} {cat.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Right Column */}
+          <div>
+            <label className="label font-semibold">Salary Range</label>
+            <input
+              type="text"
+              name="salary"
+              className="input input-bordered w-full"
+              placeholder="e.g. 35-45"
+              required
+              defaultValue={salary}
+            />
+
+            <label className="label font-semibold mt-4">Job Type</label>
+            <select
+              name="jobType"
+              className="select select-bordered w-full"
+              required
+              defaultValue={jobType}
+            >
+              <option value="">Select Job Type</option>
+              <option value="Full Time">Full Time</option>
+              <option value="Part Time">Part Time</option>
+              <option value="Freelancer">Freelancer</option>
+              <option value="Internship">Internship</option>
+            </select>
+
+            <label className="label font-semibold mt-4">Visibility</label>
+            <select
+              name="visibility"
+              className="select select-bordered w-full"
+              required
+              defaultValue={visibility}
+            >
+              <option value="">Select Visibility</option>
+              <option value="Public">Public</option>
+              <option value="Private">Private</option>
+            </select>
+
+            <label className="label font-semibold mt-4">Urgency</label>
+            <select
+              name="urgency"
+              className="select select-bordered w-full"
+              required
+              defaultValue={urgency}
+            >
+              <option value="">Select Urgency</option>
+              <option value="Normal">Normal</option>
+              <option value="Urgent">Urgent</option>
+            </select>
+
+            <label className="label font-semibold mt-4">Description</label>
+            <textarea
+              name="description"
+              className="textarea textarea-bordered w-full min-h-[120px]"
+              placeholder="Add job description, responsibilities, requirements..."
+              required
+              defaultValue={description}
+            />
+          </div>
+
+          {/* Submit Button - Full Width */}
+          <div className="col-span-1 md:col-span-2">
+            <button className="btn bg-primary hover:bg-primary/90 text-white w-full mt-6">
+              Update Job
+            </button>
+          </div>
         </form>
       </div>
     </div>

@@ -1,14 +1,34 @@
 import React from "react";
 import { Link } from "react-router";
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedinIn,
+} from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-base-100 rounded-2xl">
-      <div className="footer  my-4 grid-cols-4  py-4 px-2">
+    <footer className="bg-secondary text-white rounded-2xl">
+      <div className="footer  my-4  grid-cols-1 md:grid-cols-4  py-4 px-2">
         <aside>
           <a className=" text-3xl font-bold">
             Task <span className="text-base-200"> Nex</span>
           </a>
+          <div className="flex space-x-4 text-gray-600 text-2xl">
+            <a href="#" className="hover:text-primary">
+              <FaFacebookF />
+            </a>
+            <a href="#" className="hover:text-primary">
+              <FaTwitter />
+            </a>
+            <a href="#" className="hover:text-primary">
+              <FaInstagram />
+            </a>
+            <a href="#" className="hover:text-primary">
+              <FaLinkedinIn />
+            </a>
+          </div>
         </aside>
         <nav>
           <h6 className="footer-title">Company</h6>
@@ -18,7 +38,7 @@ const Footer = () => {
           <Link to="/contact_us" className="link link-hover">
             Contact
           </Link>
-          <Link to="/browse_tasks" className="link link-hover">
+          <Link to="/find-job" className="link link-hover">
             Jobs
           </Link>
         </nav>

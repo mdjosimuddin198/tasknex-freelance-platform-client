@@ -5,10 +5,11 @@ import "swiper/css";
 import "swiper/css/pagination";
 import Slider from "./Slider";
 import WhyChooseUs from "./WhyChooseUs";
-import ReviewSection from "./ReviewSection";
 import Newsletter from "./Newsletter";
 import BlogSection from "./BlogSection";
 import BrowseTasks from "../page/BrowseTasks";
+import CatagorySection from "./CatagorySection";
+import Testimonial from "./Testimonial";
 
 const slides = [
   {
@@ -68,9 +69,10 @@ const Hero = () => {
         ))}
       </Swiper>
       {/* lanading page  */}
+      <CatagorySection />
       <BrowseTasks />
       <WhyChooseUs />
-      <ReviewSection />
+      <Testimonial />
       <BlogSection />
       <Newsletter />
     </>
