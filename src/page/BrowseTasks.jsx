@@ -9,7 +9,7 @@ const BrowseTasks = () => {
   const [searchText, setSearchText] = useState("");
   console.log(data);
   const findJobs = data.filter((job) =>
-    job.title.toLowerCase().includes(searchText.toLowerCase())
+    job?.title?.toLowerCase().includes(searchText.toLowerCase())
   );
   return (
     <div className="py-6">

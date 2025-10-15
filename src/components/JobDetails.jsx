@@ -9,36 +9,7 @@ import JobDescriptionLeft from "./jobDescription/JobDescriptionLeft";
 import JobDescriptionRight from "./jobDescription/JobDescriptionRight";
 
 const JobDetails = () => {
-  const { logedInuser } = useContext(AuthContext);
   const job = useLoaderData();
-  const [bidsCount, setBidsCount] = useState(0);
-  useEffect(() => {
-    fetch(`http://localhost:5000/bids/${job._id}`, {
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then((data) => setBidsCount(data.count));
-  }, [job._id]);
-
-  const handleBidClick = () => {
-    fetch(`http://localhost:5000/bids/${job._id}/${logedInuser.uid}`, {
-      method: "POST",
-      credentials: "include",
-    })
-      .then((res) => {
-        if (res.status === 400) {
-          toast.error("You have already join  on this event.");
-          return;
-        }
-        return res.json();
-      })
-      .then((data) => {
-        if (data) {
-          setBidsCount((prev) => prev + 1);
-          toast.success("join successful this event");
-        }
-      });
-  };
 
   const companyEmail = job.email; // কোম্পানির ইমেইল
   const subject = `Application for ${job.title} Position at ${job.company}`;

@@ -5,6 +5,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import { FaRegHeart } from "react-icons/fa6";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const MyPostedTasks = () => {
   const { logedInuser } = useContext(AuthContext);
@@ -15,36 +16,10 @@ const MyPostedTasks = () => {
   );
 
   const [taskDel, setTaskDel] = useState(myPost);
-  // console.log(taskDel);
-  const [bids, setBids] = useState([]);
-  const [postCount, setPostCount] = useState(0);
-  const [allBids, setAllBids] = useState([]);
-
-  const handelBits = (id) => {
-    const userBids = bids.filter((bid) => bid.userId === id);
-    setAllBids(userBids);
-    document.getElementById("my_modal_1").showModal();
+  const handleFavourite = () => {
+    toast.warn("stay connect , coming soon");
   };
-
-  useEffect(() => {
-    const fetchPostCount = async () => {
-      try {
-        const res = await fetch("http://localhost:5000/bids", {
-          credentials: "include",
-        });
-        const data = await res.json();
-        setBids(data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    if (logedInuser?._id) {
-      fetchPostCount();
-    }
-  }, [logedInuser?._id]);
-
-  const handleDeleteUser = (id) => {
+  const handleDeleteJob = (id) => {
     // console.log(id);
 
     Swal.fire({
@@ -137,11 +112,11 @@ const MyPostedTasks = () => {
                         </div>
                       </div>
                     </td>
-                    <td>${post.salary}</td>
+                    <td>${post.salary}k</td>
                     <td>{post.category.name}</td>
                     <th className="space-x-1.5 space-y-1.5">
                       <button
-                        onClick={() => handelBits(post._id)}
+                        onClick={handleFavourite}
                         className="btn btn-accent text-white text-[15px]"
                       >
                         {" "}
@@ -155,7 +130,7 @@ const MyPostedTasks = () => {
                         <CiEdit />
                       </Link>
                       <button
-                        onClick={() => handleDeleteUser(post._id)}
+                        onClick={() => handleDeleteJob(post._id)}
                         className="btn btn-accent  text-white text-[15px]"
                       >
                         <MdDeleteOutline />
@@ -168,28 +143,6 @@ const MyPostedTasks = () => {
           </div>
         </div>
       )}
-      <dialog id="my_modal_1" className="modal ">
-        <div className="modal-box bg-white">
-          {allBids.map((bid) => (
-            <div key={bid._id} className="bg-white p-4 rounded-lg shadow mb-3">
-              <h3 className="font-bold">User ID: {bid._id}</h3>
-              <p>Total Users Who Joined This Event {bid.count || "0"}</p>
-            </div>
-          ))}
-
-          {allBids.length === 0 && (
-            <p className="text-accent">
-              there were no participants in this event
-            </p>
-          )}
-          <div className="modal-action">
-            <form method="dialog">
-              {/* if there is a button in form, it will close the modal */}
-              <button className="btn">Close</button>
-            </form>
-          </div>
-        </div>
-      </dialog>
     </>
   );
 };
