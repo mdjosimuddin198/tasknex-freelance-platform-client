@@ -196,7 +196,7 @@ const AddJob = () => {
 
         {/* Submit Button - Full Width */}
         <div className="col-span-1 md:col-span-2">
-          <button className="btn bg-primary hover:bg-primary/90 text-white w-full mt-6">
+          <button className="btn inline-block bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 py-2 rounded-full font-medium hover:shadow-[0_0_10px_#22d3ee] transition w-full mt-6">
             Post Job
           </button>
         </div>

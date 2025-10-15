@@ -3,10 +3,24 @@ import React from "react";
 import { Link } from "react-router";
 import { CiLocationOn, CiStopwatch } from "react-icons/ci";
 import { GiMoneyStack } from "react-icons/gi";
-
+import { motion } from "motion/react";
 const JobCard = ({ job }) => {
   return (
-    <div className="border rounded-xl shadow-sm p-5 flex flex-col gap-4 bg-gradient-to-r from-[#2563eb30] to-[#2563eb40]">
+    <motion.div
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 1.0 }}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: false, amount: 0.6, margin: "-50px" }}
+      transition={{
+        duration: 0.6,
+        ease: "easeInOut",
+        type: "spring",
+        stiffness: 120,
+        damping: 20,
+      }}
+      className="border rounded-xl shadow-sm p-5 flex flex-col gap-4 bg-gradient-to-r from-[#2563eb30] to-[#2563eb40]"
+    >
       {/* Company Info */}
       <div className="flex items-center gap-3">
         <img
@@ -60,7 +74,7 @@ const JobCard = ({ job }) => {
           {job.urgency}
         </span>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

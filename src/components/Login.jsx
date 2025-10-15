@@ -11,7 +11,7 @@ import { AuthContext } from "../context/AuthProvider";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { loginUser, handlegoogle } = useContext(AuthContext);
+  const { loginUser, logedInuser, handlegoogle } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -24,15 +24,18 @@ const Login = () => {
 
     loginUser(email, password)
       .then((result) => {
+        const user = result?.user;
         // console.log(result);
         navigate(`${location.state ? location.state : "/"}`);
-        toast.success(`Loged In SuccessFully `);
+        toast.success(
+          `You’re in! Great to see you again, ${user?.displayName} ! `
+        );
       })
       .catch((error) => {
         console.log(error);
         toast.error(
           error.message ||
-            "Login failed! Please check your email and password and try again."
+            " 👋Login failed! Please check your email and password and try again."
         );
       });
   };
@@ -42,7 +45,9 @@ const Login = () => {
     handlegoogle()
       .then((result) => {
         navigate(`${location.state ? location.state : "/"}`);
-        toast.success(`Loged In SuccessFully `);
+        toast.success(
+          `👋 You’re in! Great to see you again, ${user?.displayName} ! `
+        );
         // console.log(result);
       })
       .catch((error) => {
@@ -52,10 +57,6 @@ const Login = () => {
   };
   return (
     <>
-      {/* <Helmet>
-        <title>Login page | GreenBox BD </title>
-      </Helmet> */}
-
       <div className="card bg-white mx-auto my-20 w-full max-w-sm shadow-2xl rounded-2xl">
         <div className="card-body">
           <h2 className="text-center text-2xl font-bold mb-2">
@@ -72,6 +73,7 @@ const Login = () => {
                   name="email"
                   className="w-full focus:outline-none"
                   placeholder="Enter your email"
+                  defaultValue={"josim@gmail.com"}
                   required
                 />
               </label>
@@ -87,6 +89,7 @@ const Login = () => {
                   className="w-full focus:outline-none"
                   placeholder="Enter your password"
                   required
+                  defaultValue={"Abc123"}
                 />
                 <span
                   onClick={() => setShowPassword(!showPassword)}

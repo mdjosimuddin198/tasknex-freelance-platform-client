@@ -11,6 +11,19 @@ const Dashboard = () => {
   const { setLogedInUser, logOutUser } = useContext(AuthContext);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  // navlink
+  const navItems = [
+    { name: "Home", path: "/", icon: <CiHome /> },
+    {
+      name: "My Posted Job",
+      path: "/dashboard/my_posted_tasks",
+      icon: <MdAssignment />,
+    },
+    { name: "Add New Job", path: "/dashboard/add_job", icon: <MdGavel /> },
+    { name: "Settings", path: "/dashboard/setting", icon: <MdSettings /> },
+    { name: "Profile", path: "/dashboard/profile", icon: <FaUser /> },
+  ];
+
   const handleLogOutUser = async () => {
     try {
       await logOutUser();
@@ -20,7 +33,7 @@ const Dashboard = () => {
       });
 
       setLogedInUser(null);
-      toast.success("Log Out Successfully");
+      toast.success("👋 You’ve logged out. See you again soon!");
     } catch (error) {
       console.error(error);
       toast.error("error found.");
@@ -45,41 +58,20 @@ const Dashboard = () => {
         </Link>
 
         <ul className="space-y-4">
-          <NavLink
-            to="/dashboard"
-            onClick={() => setSidebarOpen(false)}
-            className="hover:bg-gray-100 hover:text-primary p-2 rounded cursor-pointer flex items-center gap-2"
-          >
-            <CiHome /> Home
-          </NavLink>
-          <NavLink
-            to="/dashboard/my_posted_tasks"
-            onClick={() => setSidebarOpen(false)}
-            className="hover:bg-gray-100 hover:text-primary p-2 rounded cursor-pointer flex items-center gap-2"
-          >
-            <MdAssignment /> My Posted Job
-          </NavLink>
-          <NavLink
-            to="/dashboard/add_job"
-            onClick={() => setSidebarOpen(false)}
-            className="hover:bg-gray-100 hover:text-primary p-2 rounded cursor-pointer flex items-center gap-2"
-          >
-            <MdGavel /> Add New Job
-          </NavLink>
-          <NavLink
-            to="/dashboard/setting"
-            onClick={() => setSidebarOpen(false)}
-            className="hover:bg-gray-100 hover:text-primary p-2 rounded cursor-pointer flex items-center gap-2"
-          >
-            <MdSettings /> Settings
-          </NavLink>
-          <NavLink
-            to="/dashboard/profile"
-            onClick={() => setSidebarOpen(false)}
-            className="hover:bg-gray-100 hover:text-primary p-2 rounded cursor-pointer flex items-center gap-2"
-          >
-            <FaUser /> Profile
-          </NavLink>
+          {navItems.map((item) => (
+            <NavLink
+              key={item.path}
+              to={item.path}
+              onClick={() => setSidebarOpen(false)}
+              className={({ isActive }) =>
+                `hover:bg-gray-100 hover:text-primary  p-2 rounded cursor-pointer flex items-center gap-2 transition ${
+                  isActive ? "bg-gray-100 text-primary font-medium" : ""
+                }`
+              }
+            >
+              {item.icon} {item.name}
+            </NavLink>
+          ))}
 
           <button
             onClick={handleLogOutUser}

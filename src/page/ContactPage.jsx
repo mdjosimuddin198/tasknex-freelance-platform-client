@@ -24,14 +24,48 @@ const ContactPage = () => {
 
   return (
     <section className="max-w-3xl mx-auto p-6">
-      <h2 className="text-4xl font-bold text-center mb-8 text-primary">
-        Contact Us
-      </h2>
+      <h2 className="text-5xl py-3 font-bold text-center">Contact Us</h2>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-3 border p-6 rounded-2xl"
+      >
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block mb-2 font-semibold" htmlFor="name">
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              className="input input-bordered w-full"
+              placeholder="Your name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block mb-2 font-semibold" htmlFor="email">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              className="input input-bordered w-full"
+              placeholder="Your email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
         <div>
           <label className="block mb-2 font-semibold" htmlFor="name">
-            Name
+            Subject
           </label>
           <input
             type="text"
@@ -40,22 +74,6 @@ const ContactPage = () => {
             className="input input-bordered w-full"
             placeholder="Your name"
             value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div>
-          <label className="block mb-2 font-semibold" htmlFor="email">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            className="input input-bordered w-full"
-            placeholder="Your email"
-            value={formData.email}
             onChange={handleChange}
             required
           />
@@ -77,7 +95,10 @@ const ContactPage = () => {
           ></textarea>
         </div>
 
-        <button type="submit" className="btn btn-primary w-full">
+        <button
+          type="submit"
+          className="btn  bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 py-2 rounded-full font-medium hover:shadow-[0_0_10px_#22d3ee] transition w-full"
+        >
           Send Message
         </button>
       </form>

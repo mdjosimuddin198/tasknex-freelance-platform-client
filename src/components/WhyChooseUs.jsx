@@ -1,3 +1,5 @@
+import React from "react";
+import { motion } from "motion/react";
 import { FaBriefcase, FaShieldAlt, FaUserGraduate } from "react-icons/fa";
 
 const whyData = [
@@ -40,7 +42,17 @@ const WhyChooseUs = () => {
         {/* Value Cards */}
         <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {whyData.map((item) => (
-            <div
+            <motion.div
+              initial={{ y: 40, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: false, amount: 0.6, margin: "-50px" }}
+              transition={{
+                duration: 0.6,
+                ease: "easeInOut",
+                type: "spring",
+                stiffness: 120,
+                damping: 20,
+              }}
               key={item.id}
               className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-transform transform hover:-translate-y-1 p-8 text-left"
             >
@@ -51,7 +63,7 @@ const WhyChooseUs = () => {
                 {item.title}
               </h3>
               <p className="text-gray-600 text-sm">{item.desc}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

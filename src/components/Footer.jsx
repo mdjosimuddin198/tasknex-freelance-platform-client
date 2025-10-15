@@ -6,14 +6,22 @@ import {
   FaInstagram,
   FaLinkedinIn,
 } from "react-icons/fa";
+import { motion } from "motion/react";
 
 const Footer = () => {
   return (
-    <footer className="bg-secondary text-white rounded-2xl">
+    <motion.footer
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ amount: 0.5, once: false, margin: "-30px" }}
+      transition={{ ease: "easeOut", duration: 0.6 }}
+      className="bg-secondary rounded-xl my-2 w-full text-white "
+    >
       <div className="footer  my-4  grid-cols-1 md:grid-cols-4  py-4 px-2">
         <aside>
-          <a className=" text-3xl font-bold">
-            Task <span className="text-base-200"> Nex</span>
+          {/* Logo */}
+          <a className="text-3xl text-black font-bold">
+            Task <span className="text-primary">Nex</span>
           </a>
           <div className="flex space-x-4 text-gray-600 text-2xl">
             <a href="#" className="hover:text-primary">
@@ -82,11 +90,10 @@ const Footer = () => {
           <Link className="link link-hover">Cookie policy</Link>
         </nav>
       </div>
-      <p className="text-center mb-4">
-        Copyright © {new Date().getFullYear()} - All right reserved by TaskNex -
-        Freelance Bidding Platform
+      <p className="text-center pb-4">
+        Copyright © {new Date().getFullYear()} - All right reserved by TaskNex
       </p>
-    </footer>
+    </motion.footer>
   );
 };
 

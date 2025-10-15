@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { motion, scale } from "motion/react";
 
 const CatagorySection = () => {
   const [jobData, setJobData] = useState([]);
@@ -39,19 +39,32 @@ const CatagorySection = () => {
       </p>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
         {uniqueCategories.map((job, i) => (
-          <Link
-            to={`/category/${job.name}`}
+          <motion.div
+            initial={{ y: 50, opacity: 0 }}
+            viewport={{ once: false, amount: 0.6 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{
+              duration: 0.6,
+              ease: "easeInOut",
+              type: "spring",
+              stiffness: 120,
+              damping: 20,
+            }}
             key={i}
             className="p-6 border flex items-center  gap-6 rounded-xl shadow hover:shadow-lg transition"
           >
-            <div className="text-3xl flex items-center justify-center w-20 h-20 rounded-lg bg-primary/20 object-cover">
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 1.0 }}
+              className="text-3xl flex items-center justify-center w-20 h-20 rounded-lg bg-primary/20 object-cover"
+            >
               {job.icon}
-            </div>
+            </motion.div>
             <div>
               <h3 className="font-semibold mt-2">{job.name}</h3>
               <p>({job.count} open positions)</p>
             </div>
-          </Link>
+          </motion.div>
         ))}
       </div>
     </div>

@@ -39,7 +39,7 @@ const MyProfile = () => {
         <title>My Profile | GreenBox BD</title>
       </Helmet> */}
 
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+      <div className=" bg-gray-100 flex items-center justify-center p-4">
         <div className="bg-white shadow-2xl rounded-2xl w-full max-w-2xl p-8">
           <div className="flex flex-col items-center mb-6">
             <img
@@ -56,7 +56,7 @@ const MyProfile = () => {
           <form onSubmit={handleUpdate} className="space-y-4">
             <div>
               <label className="block font-medium text-gray-700 mb-1">
-                Update Name
+                Update Your Name :
               </label>
               <input
                 type="text"
@@ -68,7 +68,7 @@ const MyProfile = () => {
             </div>
             <div>
               <label className="block font-medium text-gray-700 mb-1">
-                Update Photo URL
+                Update Your Photo URL :
               </label>
               <input
                 type="text"
@@ -80,7 +80,7 @@ const MyProfile = () => {
             </div>
             <button
               type="submit"
-              className="w-full bg-primary text-white py-2 rounded-lg hover:skew-1 transition"
+              className="btn w-full  bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 py-2 rounded-full font-medium hover:shadow-[0_0_10px_#22d3ee] transition"
             >
               Save Changes
             </button>

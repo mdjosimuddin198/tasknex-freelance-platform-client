@@ -79,7 +79,7 @@ const testimonials = [
 
 const Testimonial = () => {
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 ">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
         <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900">
           What Our Users Say

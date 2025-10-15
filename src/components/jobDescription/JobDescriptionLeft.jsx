@@ -81,6 +81,27 @@ const JobDescriptionLeft = ({ job }) => {
           <li>Experience with agile/scrum methodologies.</li>
         </ul>
       </div>
+      <div>
+        <h2 className="text-2xl font-semibold mb-3">Why Join Us</h2>
+        <ul className="list-disc px-6 list-outside space-y-2 text-gray-700">
+          <li>
+            {" "}
+            Opportunity to work directly with experienced European engineers
+          </li>
+          <li>
+            Exposure to international best practices and modern tech stacks.
+          </li>
+          <li>Opportunity to work on exciting, impactful projects</li>
+          <li>Collaborative and growth-oriented environment</li>
+          <li>Flexible working arrangements</li>
+          <li> Competitive compensation</li>
+        </ul>
+        <p className="font-semibold">
+          P. S : Since you’ll be working with international teams, clear English
+          communication is very important. If you’re not comfortable
+          communicating in English, we kindly ask that you do not apply.
+        </p>
+      </div>
     </div>
   );
 };

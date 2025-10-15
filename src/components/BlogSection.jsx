@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "motion/react";
 import { toast } from "react-toastify";
 
 const blogs = [
@@ -41,9 +42,21 @@ const BlogSection = () => {
 
       <div className="grid gap-8 md:grid-cols-3">
         {blogs.map((blog) => (
-          <div
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 1.0 }}
+            initial={{ opacity: 0, x: 60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false, amount: 0.4, margin: "-30px" }}
+            transition={{
+              duration: 0.8,
+              ease: "easeInOut",
+              type: "spring",
+              stiffness: 120,
+              damping: 20,
+            }}
             key={blog.id}
-            className="card hover:shadow-lg transition-transform transform hover:-translate-y-1 p-8 text-left bg-base-100 shadow-xl"
+            className="card text-left bg-base-100 "
           >
             <figure>
               <img
@@ -58,13 +71,13 @@ const BlogSection = () => {
               <div className="card-actions justify-end">
                 <button
                   onClick={handleRead}
-                  className="btn btn-primary text-white btn-sm"
+                  className="btn inline-block bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 py-2 rounded-full font-medium hover:shadow-[0_0_10px_#22d3ee] transition "
                 >
                   Read More
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

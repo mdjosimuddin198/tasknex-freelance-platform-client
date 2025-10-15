@@ -93,7 +93,13 @@ const JobDescriptionRight = ({ job }) => {
         <FaGlobe />{" "}
         <p className="hover:text-primary">https://{job.company}.com</p>
       </div>
-      <div></div>
+      <div>
+        <img
+          className="h-[730px]"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoSQ53YkpZfe_VArsox_YxenXF1nw9M-0yILe7ZkRFB8oEZXj_FLbwaM42bVK4wr-oJXQ&usqp=CAU"
+          alt=""
+        />
+      </div>
     </div>
   );
 };
